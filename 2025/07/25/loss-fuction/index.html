@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Loss Function（损失函数） 选择模型家族  定义损失函数量化预测误差  通过优化算法找到最小化损失的最优模型参数  一、 损失函数的作用  目标： 量化模型预测与真实结果之间的差异。 示例：均方误差（MSE）用于回归；交叉熵损失用于分类。 考虑因素：损失的性质（凸性、可微性等）、易于优化、对异常值的鲁棒性等。  二、损失函数的重要性：  在机器学习中，目标是使预测值尽可能接近真实值，因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Loss fuction">
+<meta property="og:url" content="https://qshen0629.github.io/2025/07/25/loss-fuction/index.html">
+<meta property="og:site_name" content="SHEN&#39;s Blog">
+<meta property="og:description" content="Loss Function（损失函数） 选择模型家族  定义损失函数量化预测误差  通过优化算法找到最小化损失的最优模型参数  一、 损失函数的作用  目标： 量化模型预测与真实结果之间的差异。 示例：均方误差（MSE）用于回归；交叉熵损失用于分类。 考虑因素：损失的性质（凸性、可微性等）、易于优化、对异常值的鲁棒性等。  二、损失函数的重要性：  在机器学习中，目标是使预测值尽可能接近真实值，因">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/25/loss-fuction/61155c46e4f94bd0ada1f0b6e2df50b6tplv-tlddhu82om-image.jpeg">
+<meta property="article:published_time" content="2025-07-25T07:43:56.000Z">
+<meta property="article:modified_time" content="2025-07-25T10:49:46.958Z">
+<meta property="article:author" content="SHENQI">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="loss fuction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qshen0629.github.io/2025/07/25/loss-fuction/61155c46e4f94bd0ada1f0b6e2df50b6tplv-tlddhu82om-image.jpeg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/web-app-manifest-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Loss fuction</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/07/25/batch-size/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/25/hello-world/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/25/loss-fuction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&text=Loss fuction"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&is_video=false&description=Loss fuction"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Loss fuction&body=Check out this article: https://qshen0629.github.io/2025/07/25/loss-fuction/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&name=Loss fuction&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/25/loss-fuction/&t=Loss fuction"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Loss-Function%EF%BC%88%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">Loss Function（损失函数）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">几种损失函数介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94"><span class="toc-number">3.</span> <span class="toc-text">回归损失函数与交叉熵损失函数对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-vs-%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">回归损失函数 vs 交叉熵损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.2.</span> <span class="toc-text">交叉熵损失函数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%85%AC%E5%BC%8F"><span class="toc-number">3.2.1.</span> <span class="toc-text">1. 定义与公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">3.2.2.</span> <span class="toc-text">2. 信息论基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">3.2.3.</span> <span class="toc-text">3. 交叉熵损失函数的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">缺点：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%8F%98%E7%A7%8D%E4%B8%8E%E6%89%A9%E5%B1%95"><span class="toc-number">3.2.4.</span> <span class="toc-text">4. 变种与扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Focal-Loss%EF%BC%88%E7%84%A6%E7%82%B9%E6%8D%9F%E5%A4%B1%EF%BC%89%EF%BC%9A"><span class="toc-number">3.2.4.1.</span> <span class="toc-text">Focal Loss（焦点损失）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Label-Smoothing%EF%BC%88%E6%A0%87%E7%AD%BE%E5%B9%B3%E6%BB%91%EF%BC%89%EF%BC%9A"><span class="toc-number">3.2.4.2.</span> <span class="toc-text">Label Smoothing（标签平滑）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Weighted-Cross-Entropy%EF%BC%88%E5%8A%A0%E6%9D%83%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%89%EF%BC%9A"><span class="toc-number">3.2.4.3.</span> <span class="toc-text">Weighted Cross-Entropy（加权交叉熵）：</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Loss fuction
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">SHENQI</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-25T07:43:56.000Z" class="dt-published" itemprop="datePublished">2025-07-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/loss-fuction/" rel="tag">loss fuction</a>, <a class="p-category" href="/tags/machine-learning/" rel="tag">machine learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Loss-Function（损失函数）"><a href="#Loss-Function（损失函数）" class="headerlink" title="Loss Function（损失函数）"></a>Loss Function（损失函数）</h2><ol>
+<li>选择模型家族 </li>
+<li><strong>定义损失函数量化预测误差</strong> </li>
+<li>通过优化算法找到最小化损失的最优模型参数</li>
+</ol>
+<p>一、 损失函数的作用</p>
+<ul>
+<li>目标： <strong>量化模型预测与真实结果之间的差异。</strong></li>
+<li>示例：均方误差（MSE）用于回归；交叉熵损失用于分类。</li>
+<li>考虑因素：损失的性质（凸性、可微性等）、易于优化、对异常值的鲁棒性等。</li>
+</ul>
+<p>二、损失函数的重要性：</p>
+<ul>
+<li>在机器学习中，目标是使预测值尽可能接近真实值，因此需要通过最小化预测值和真实值之间的差异来实现。</li>
+<li>损失函数的选择对于模型的训练速度和效果至关重要，因为不同的损失函数会导致不同的梯度下降速度。</li>
+</ul>
+<p>三、损失函数的位置：</p>
+<ul>
+<li>损失函数位于机器学习模型的向前传播和向后传播之间。</li>
+<li>在向前传播阶段，模型根据输入特征生成预测值。</li>
+<li>损失函数接收这些预测值，并计算与真实值之间的差异。</li>
+<li>这个差异随后被用于向后传播阶段，以更新模型的参数并减少未来的预测误差。</li>
+</ul>
+<p><img src="/2025/07/25/loss-fuction/61155c46e4f94bd0ada1f0b6e2df50b6tplv-tlddhu82om-image.jpeg" alt="picture.image"></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>**误差和损失的区别：**误差反映单个数据点的预测偏差，损失则是整体数据集的预测偏差总和。损失函数运用这两者原理，聚合误差以优化模型，降低总体预测偏差。</p>
+<ul>
+<li><p>误差（Error）：对单个数据点预测结果与真实值之间的差异，用于评估模型在特定数据点上的预测准确性。</p>
+<ul>
+<li><p>定义：误差是指模型在对单个数据点进行预测时，其预测结果与真实值之间的差异或偏离程度。这种差异反映了模型预测的不准确性或偏差。</p>
+</li>
+<li><p>计算：误差可以通过多种数学公式来计算。其中，绝对误差是预测值与真实值之间差值的绝对值，用于量化预测偏离真实值的实际大小；平方误差则是预测值与真实值之间差值的平方，常用于平方损失函数中，以便更显著地突出较大的误差。</p>
+</li>
+</ul>
+</li>
+<li><p>损失（Loss）：损失是衡量机器学习模型在整个数据集上预测不准确性的总体指标，通过最小化损失可以优化模型参数并改进预测性能。</p>
+<ul>
+<li><p>定义：损失是衡量机器学习模型在整个数据集上预测的总体不准确性的指标。它反映了模型预测与真实值之间的差异，并将这些差异进行聚合， <strong>以提供一个标量值来表示预测的总体不准确性。</strong></p>
+</li>
+<li><p>计算：损失的具体计算是通过损失函数来完成的。损失函数接受模型的预测值和真实值作为输入，并输出一个标量值，即损失值，表示模型在整个数据集上的总体预测误差。</p>
+</li>
+<li><p><strong>损失曲线</strong> ：损失曲线直观地呈现了模型在训练过程中损失值的变化趋势。通过绘制训练损失和验证损失随迭代次数的变化，我们能够洞察模型是否遭遇过拟合或欠拟合等问题，进而调整模型结构和训练策略。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="几种损失函数介绍"><a href="#几种损失函数介绍" class="headerlink" title="几种损失函数介绍"></a>几种损失函数介绍</h2><p><strong>1. MAE</strong>（Mean Absolute Error - 平均绝对误差）是误差的绝对值的平均值，其公式为：<br>$$<br>\text { MAE }&#x3D;\frac{1}{n} \sum_{i&#x3D;1}^{n}\left|y_{i}-\hat{y}_{i}\right| .<br>$$<br>其中， $n$为样本个数；$y_i$ 为真实值；$\hat{y_i}$ 为预测值。</p>
+<p>MAE对异常值不敏感，不能反映预测误差的分布情况。</p>
+<p><strong>2. MSE</strong>（Mean Square Error - 均方误差）是误差平方和的平均值，其公式为：<br>$$<br>\mathrm{MSE}&#x3D;\frac{1}{n} \sum_{i&#x3D;1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2} .<br>$$<br>其中，$n$为样本个数； $y_i$为真实值； $\hat {y_i}$为预测值。</p>
+<p>MSE对异常值敏感（因为当异常值与正常值差距较大时，误差会大于1，取平方值以后会进一步增大数值），但它们能够反映预测误差的分布情况。</p>
+<p><strong>3. RMSE</strong>（Root Mean Square Error - 均方根误差）是MSE的平方根，其公式为：<br>$$<br>\text{RMSE} &#x3D; \sqrt{\frac{1}{n} \sum_{i&#x3D;1}^{n} (y_i - \hat{y}_i)^2}<br>$$<br>其中， $n$为样本个数；$y_i$ 为真实值；$\hat{y_i}$ 为预测值。</p>
+<p>RMSE对异常值敏感，它们能够反映预测误差的分布情况。</p>
+<p><strong>4. MRE</strong>（Mean Relative Error - 平均相对误差）是相对误差（相对误差是指误差相对于真实值的比例）绝对值的平均值，其公式为：<br>$$<br>\text{MRE} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} \frac{|y_i - \hat{y}_i|}{|y_i|}<br>$$<br>其中， $n$为样本个数；$y_i$ 为真实值；$\hat{y_i}$ 为预测值。</p>
+<p>MRE可以反映相对误差的大小，但是不能反映绝对误差的大小。</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>全称</th>
+<th>公式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MAE</strong></td>
+<td>Mean Absolute Error<br/>平均绝对误差</td>
+<td>$\text{MAE} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} |y_i - \hat{y}_i|$</td>
+<td>• 对异常值不敏感<br/>• 直观易理解<br/>• 单位与原数据一致<br/>• 计算简单</td>
+<td>• 在零点不可导<br/>• 对所有误差权重相同<br/>• 优化相对困难</td>
+</tr>
+<tr>
+<td><strong>MSE</strong></td>
+<td>Mean Squared Error<br/>平均平方误差</td>
+<td>$\text{MSE} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} (y_i - \hat{y}_i)^2$</td>
+<td>• 处处可导，便于优化<br/>• 对大误差惩罚更重<br/>• 数学性质良好<br/>• 广泛应用于损失函数</td>
+<td>• 对异常值敏感<br/>• 单位是原数据的平方<br/>• 不直观，难以解释</td>
+</tr>
+<tr>
+<td><strong>RMSE</strong></td>
+<td>Root Mean Square Error<br/>均方根误差</td>
+<td>$\text{RMSE} &#x3D; \sqrt{\frac{1}{n} \sum_{i&#x3D;1}^{n} (y_i - \hat{y}_i)^2}$</td>
+<td>• 单位与原数据一致<br/>• 对大误差惩罚重<br/>• 比MSE更直观<br/>• 保持MSE的数学性质</td>
+<td>• 对异常值敏感<br/>• 计算复杂度略高<br/>• 在某些优化中不如MSE方便</td>
+</tr>
+<tr>
+<td><strong>MRE</strong></td>
+<td>Mean Relative Error<br/>平均相对误差</td>
+<td>$\text{MRE} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} \frac{|y_i - \hat{y}_i|}{|y_i|}$</td>
+<td>• 无量纲，便于比较<br/>• 反映相对误差大小<br/>• 适合不同量级数据比较</td>
+<td>• 当真实值接近0时不稳定<br/>• 对小的真实值敏感<br/>• 可能产生极大值</td>
+</tr>
+</tbody></table>
+<p><strong>使用建议：</strong></p>
+<ul>
+<li><strong>MAE</strong>：适用于需要稳健性、不希望异常值过度影响结果的场景</li>
+<li><strong>MSE</strong>：适用于模型训练优化，特别是需要可导性的场景</li>
+<li><strong>RMSE</strong>：适用于需要与原数据同量纲且希望惩罚大误差的评估场景</li>
+<li><strong>MRE</strong>：适用于不同量级数据的相对误差比较，但需注意分母接近零的情况</li>
+</ul>
+<h2 id="回归损失函数与交叉熵损失函数对比"><a href="#回归损失函数与交叉熵损失函数对比" class="headerlink" title="回归损失函数与交叉熵损失函数对比"></a>回归损失函数与交叉熵损失函数对比</h2><h3 id="回归损失函数-vs-交叉熵损失函数"><a href="#回归损失函数-vs-交叉熵损失函数" class="headerlink" title="回归损失函数 vs 交叉熵损失函数"></a>回归损失函数 vs 交叉熵损失函数</h3><table>
+<thead>
+<tr>
+<th>特征</th>
+<th>回归损失函数<br/>(MAE, MSE, RMSE, MRE)</th>
+<th>交叉熵损失函数<br/>(Cross-Entropy Loss)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>适用任务</strong></td>
+<td>回归任务</td>
+<td>分类任务</td>
+</tr>
+<tr>
+<td><strong>预测目标</strong></td>
+<td>连续数值</td>
+<td>类别概率分布</td>
+</tr>
+<tr>
+<td><strong>输出形式</strong></td>
+<td>实数值</td>
+<td>概率值(0-1之间，和为1)</td>
+</tr>
+<tr>
+<td><strong>数学基础</strong></td>
+<td>距离度量</td>
+<td>信息论</td>
+</tr>
+<tr>
+<td><strong>核心思想</strong></td>
+<td>衡量预测值与真实值的差距</td>
+<td>衡量两个概率分布的差异</td>
+</tr>
+<tr>
+<td><strong>典型应用</strong></td>
+<td>房价预测、股价预测、温度预测</td>
+<td>图像分类、文本分类、情感分析</td>
+</tr>
+</tbody></table>
+<h3 id="交叉熵损失函数详解"><a href="#交叉熵损失函数详解" class="headerlink" title="交叉熵损失函数详解"></a>交叉熵损失函数详解</h3><h4 id="1-定义与公式"><a href="#1-定义与公式" class="headerlink" title="1. 定义与公式"></a>1. 定义与公式</h4><p><strong>二分类交叉熵损失函数：</strong> $\text{BCE} &#x3D; -\frac{1}{n} \sum_{i&#x3D;1}^{n} [y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i)]$</p>
+<p><strong>多分类交叉熵损失函数：</strong> $\text{CE} &#x3D; -\frac{1}{n} \sum_{i&#x3D;1}^{n} \sum_{j&#x3D;1}^{c} y_{ij} \log(\hat{y}_{ij})$</p>
+<p>其中：</p>
+<ul>
+<li>$y_i$ 或 $y_{ij}$：真实标签（one-hot编码）</li>
+<li>$\hat{y}<em>i$ 或 $\hat{y}</em>{ij}$：预测概率</li>
+<li>$n$：样本数量</li>
+<li>$c$：类别数量</li>
+</ul>
+<h4 id="2-信息论基础"><a href="#2-信息论基础" class="headerlink" title="2. 信息论基础"></a>2. 信息论基础</h4><p>交叉熵源于信息论，用于衡量两个概率分布之间的差异：</p>
+<ul>
+<li><strong>信息量</strong>：$I(x) &#x3D; -\log P(x)$</li>
+<li><strong>熵</strong>：$H(P) &#x3D; -\sum P(x) \log P(x)$</li>
+<li><strong>交叉熵</strong>：$H(P,Q) &#x3D; -\sum P(x) \log Q(x)$</li>
+<li><strong>KL散度</strong>：$D_{KL}(P||Q) &#x3D; H(P,Q) - H(P)$</li>
+</ul>
+<h4 id="3-交叉熵损失函数的特点"><a href="#3-交叉熵损失函数的特点" class="headerlink" title="3. 交叉熵损失函数的特点"></a>3. 交叉熵损失函数的特点</h4><h5 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h5><ul>
+<li><strong>概率解释明确</strong>：输出可解释为概率分布</li>
+<li><strong>数学性质良好</strong>：凸函数，便于优化</li>
+<li><strong>梯度特性优秀</strong>：在错误预测时梯度大，正确预测时梯度小</li>
+<li><strong>信息论基础</strong>：有坚实的理论基础</li>
+<li><strong>与softmax配合</strong>：天然适配softmax激活函数</li>
+</ul>
+<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><ul>
+<li><strong>仅适用于分类</strong>：不能直接用于回归任务</li>
+<li><strong>对异常标签敏感</strong>：错误标注会显著影响结果</li>
+<li><strong>需要概率输出</strong>：要求模型输出概率分布</li>
+<li><strong>数值稳定性</strong>：当预测概率接近0或1时可能出现数值问题</li>
+</ul>
+<h4 id="4-变种与扩展"><a href="#4-变种与扩展" class="headerlink" title="4. 变种与扩展"></a>4. 变种与扩展</h4><h5 id="Focal-Loss（焦点损失）："><a href="#Focal-Loss（焦点损失）：" class="headerlink" title="Focal Loss（焦点损失）："></a>Focal Loss（焦点损失）：</h5><p>$\text{FL} &#x3D; -\alpha (1-\hat{y})^\gamma \log(\hat{y})$</p>
+<ul>
+<li>解决类别不平衡问题</li>
+<li>减少易分样本的权重</li>
+</ul>
+<h5 id="Label-Smoothing（标签平滑）："><a href="#Label-Smoothing（标签平滑）：" class="headerlink" title="Label Smoothing（标签平滑）："></a>Label Smoothing（标签平滑）：</h5><p>$\text{LS-CE} &#x3D; -\sum [(1-\epsilon)\delta_{y,i} + \frac{\epsilon}{K}] \log(\hat{y}_i)$</p>
+<ul>
+<li>防止过度自信</li>
+<li>提高模型泛化能力</li>
+</ul>
+<h5 id="Weighted-Cross-Entropy（加权交叉熵）："><a href="#Weighted-Cross-Entropy（加权交叉熵）：" class="headerlink" title="Weighted Cross-Entropy（加权交叉熵）："></a>Weighted Cross-Entropy（加权交叉熵）：</h5><p>$\text{WCE} &#x3D; -\sum w_i y_i \log(\hat{y}_i)$</p>
+<ul>
+<li>处理类别不平衡</li>
+<li>对不同类别赋予不同权重</li>
+</ul>
+<p>参考链接：</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/652167878">https://zhuanlan.zhihu.com/p/652167878</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.volcengine.com/articles/7382259984165240859">https://developer.volcengine.com/articles/7382259984165240859</a></p>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Loss-Function%EF%BC%88%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">Loss Function（损失函数）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">几种损失函数介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94"><span class="toc-number">3.</span> <span class="toc-text">回归损失函数与交叉熵损失函数对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-vs-%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">回归损失函数 vs 交叉熵损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.2.</span> <span class="toc-text">交叉熵损失函数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%85%AC%E5%BC%8F"><span class="toc-number">3.2.1.</span> <span class="toc-text">1. 定义与公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">3.2.2.</span> <span class="toc-text">2. 信息论基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">3.2.3.</span> <span class="toc-text">3. 交叉熵损失函数的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">缺点：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%8F%98%E7%A7%8D%E4%B8%8E%E6%89%A9%E5%B1%95"><span class="toc-number">3.2.4.</span> <span class="toc-text">4. 变种与扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Focal-Loss%EF%BC%88%E7%84%A6%E7%82%B9%E6%8D%9F%E5%A4%B1%EF%BC%89%EF%BC%9A"><span class="toc-number">3.2.4.1.</span> <span class="toc-text">Focal Loss（焦点损失）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Label-Smoothing%EF%BC%88%E6%A0%87%E7%AD%BE%E5%B9%B3%E6%BB%91%EF%BC%89%EF%BC%9A"><span class="toc-number">3.2.4.2.</span> <span class="toc-text">Label Smoothing（标签平滑）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Weighted-Cross-Entropy%EF%BC%88%E5%8A%A0%E6%9D%83%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%89%EF%BC%9A"><span class="toc-number">3.2.4.3.</span> <span class="toc-text">Weighted Cross-Entropy（加权交叉熵）：</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/25/loss-fuction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&text=Loss fuction"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&is_video=false&description=Loss fuction"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Loss fuction&body=Check out this article: https://qshen0629.github.io/2025/07/25/loss-fuction/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&title=Loss fuction"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/25/loss-fuction/&name=Loss fuction&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/25/loss-fuction/&t=Loss fuction"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    SHENQI
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
