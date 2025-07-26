@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="序章1.how to find a functio-n设置一个合理的模型：$y&#x3D;b+wx_1$ 其中  $b$ 称作 bias，$w$ 称作 weight。 2.Define Loss from Training Dataloss is a function of parameters  $L(b,w)$ loss代表的是一组参数对于预测这个的任务好还是不好。 ex: 以1月2号为例 $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine-learning-1 (Hung-yi)">
+<meta property="og:url" content="https://qshen0629.github.io/2025/07/26/machine-learning-1/index.html">
+<meta property="og:site_name" content="SHEN&#39;s Blog">
+<meta property="og:description" content="序章1.how to find a functio-n设置一个合理的模型：$y&#x3D;b+wx_1$ 其中  $b$ 称作 bias，$w$ 称作 weight。 2.Define Loss from Training Dataloss is a function of parameters  $L(b,w)$ loss代表的是一组参数对于预测这个的任务好还是不好。 ex: 以1月2号为例 $">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726132944717.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726134628554.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726140620595.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726142353678.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726143016786.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726143645924.png">
+<meta property="article:published_time" content="2025-07-26T05:20:00.000Z">
+<meta property="article:modified_time" content="2025-07-26T06:38:43.059Z">
+<meta property="article:author" content="SHENQI">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qshen0629.github.io/image-20250726132944717.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/web-app-manifest-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Machine-learning-1 (Hung-yi)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/25/loss-fuction/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/26/machine-learning-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&text=Machine-learning-1 (Hung-yi)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&is_video=false&description=Machine-learning-1 (Hung-yi)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine-learning-1 (Hung-yi)&body=Check out this article: https://qshen0629.github.io/2025/07/26/machine-learning-1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&name=Machine-learning-1 (Hung-yi)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/26/machine-learning-1/&t=Machine-learning-1 (Hung-yi)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">序章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-how-to-find-a-functio-n"><span class="toc-number">1.1.</span> <span class="toc-text">1.how to find a functio-n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Define-Loss-from-Training-Data"><span class="toc-number">1.2.</span> <span class="toc-text">2.Define Loss from Training Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-optimization-%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3.optimization 优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%BB%B6%E7%94%B3"><span class="toc-number">1.4.</span> <span class="toc-text">4.延申</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Machine-learning-1 (Hung-yi)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">SHENQI</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-26T05:20:00.000Z" class="dt-published" itemprop="datePublished">2025-07-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/machine-learning/" rel="tag">machine learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="序章"><a href="#序章" class="headerlink" title="序章"></a>序章</h3><h4 id="1-how-to-find-a-functio-n"><a href="#1-how-to-find-a-functio-n" class="headerlink" title="1.how to find a functio-n"></a>1.how to find a functio-n</h4><p>设置一个合理的模型：$y&#x3D;b+wx_1$</p>
+<p>其中  $b$ 称作 bias，$w$ 称作 weight。</p>
+<h4 id="2-Define-Loss-from-Training-Data"><a href="#2-Define-Loss-from-Training-Data" class="headerlink" title="2.Define Loss from Training Data"></a>2.Define Loss from Training Data</h4><p>loss is a function of parameters  $L(b,w)$</p>
+<p>loss代表的是一组参数对于预测这个的任务好还是不好。</p>
+<p>ex:<img src="/image-20250726132944717.png" alt="image-20250726132944717"></p>
+<p>以1月2号为例</p>
+<p>$L(0.5k,1)\quad y&#x3D;b+wx_1 \rightarrow y &#x3D;0.5k+1x_1$ </p>
+<p>$0.5k+1x_1&#x3D;y &#x3D; 5.3k$</p>
+<p>$e_1 &#x3D; \lvert y-\hat{y}\rvert &#x3D; 0.4k$</p>
+<p>此处$\hat{y}$即为label，</p>
+<p>$$Loss:\quad L&#x3D;\frac{1}{N} \displaystyle\sum_{n}e_n $$</p>
+<p>loss的具体介绍看单独的那个吧</p>
+<p><img src="/image-20250726134628554.png" alt="image-20250726134628554"></p>
+<p>这个图很长一段时间内我都不是很理解，横轴为weight（$w$）,纵轴为bias（$b$)图上的颜色的亮度代表Loss的大小；等高线图叫做<em>error surface</em></p>
+<h4 id="3-optimization-优化"><a href="#3-optimization-优化" class="headerlink" title="3.optimization 优化"></a>3.optimization 优化</h4><p>就是接着上面的任务，寻找最合适的 $w$ 和 $b$ 来使loss最小。此例子中使用的是:</p>
+<p><em><strong>gradient descent</strong></em> :</p>
+<p>单参数：</p>
+<ol>
+<li>随机选取初始点 $w^0$</li>
+<li>计算微分 $\frac{\partial L}{\partial w}$  在 $w&#x3D;w^0$时（即在曲线$w^0$处的切线斜率）</li>
+<li>任务就是  $arg \displaystyle\min_w L$</li>
+<li>不断更新 $w$</li>
+</ol>
+<p><img src="/image-20250726140620595.png" alt="image-20250726140620595"></p>
+<p>此处参数移动的方向的步伐大小是靠超参数 <strong>学习率learning rate（$\eta$）</strong> 来定义的。</p>
+<p>局部最优解 local minimal 在batch size那个里面有</p>
+<p>双参数例子：</p>
+<p>（懒得打公式了)<br>$$<br>Model:y &#x3D; b + wx_1\<br>w^<em>,b^</em>&#x3D;arg\displaystyle\min_{w,b} L<br>$$<br><img src="/image-20250726142353678.png" alt="image-20250726142353678"></p>
+<p><img src="/image-20250726143016786.png" alt="image-20250726143016786"></p>
+<h4 id="4-延申"><a href="#4-延申" class="headerlink" title="4.延申"></a>4.延申</h4><p>上面的例子里面是只根据前一天的观看人次来预测后一天，但是根据规律可以发现是7天一循环，那么我们可以用前7天的观看次数来预测。</p>
+<p>即$y&#x3D;b+\displaystyle\sum_{j&#x3D;1}^{7} w_jx_j$</p>
+<p><img src="/image-20250726143645924.png" alt="image-20250726143645924"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">序章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-how-to-find-a-functio-n"><span class="toc-number">1.1.</span> <span class="toc-text">1.how to find a functio-n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Define-Loss-from-Training-Data"><span class="toc-number">1.2.</span> <span class="toc-text">2.Define Loss from Training Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-optimization-%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3.optimization 优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%BB%B6%E7%94%B3"><span class="toc-number">1.4.</span> <span class="toc-text">4.延申</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/26/machine-learning-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&text=Machine-learning-1 (Hung-yi)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&is_video=false&description=Machine-learning-1 (Hung-yi)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine-learning-1 (Hung-yi)&body=Check out this article: https://qshen0629.github.io/2025/07/26/machine-learning-1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&title=Machine-learning-1 (Hung-yi)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/26/machine-learning-1/&name=Machine-learning-1 (Hung-yi)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/26/machine-learning-1/&t=Machine-learning-1 (Hung-yi)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    SHENQI
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
