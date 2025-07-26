@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="序章2序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models） 源自模型自身限制的缺陷称作： Model Bias 选择更好的Model1.分段线性函数是由常数加上多段线性函数组成的 2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。 3.反之也可以，下面那个是sigmoid函数 4.使用各种sigmoid f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine-learning-2 (Hung-yi)">
+<meta property="og:url" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/index.html">
+<meta property="og:site_name" content="SHEN&#39;s Blog">
+<meta property="og:description" content="序章2序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models） 源自模型自身限制的缺陷称作： Model Bias 选择更好的Model1.分段线性函数是由常数加上多段线性函数组成的 2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。 3.反之也可以，下面那个是sigmoid函数 4.使用各种sigmoid f">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726145305430.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726145459821.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726145920813.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726150127279.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726150138281.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726151242993.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726151421291.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726151543618.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726151657014.png">
+<meta property="og:image" content="https://qshen0629.github.io/image-20250726154424265.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726154621237.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726154924298.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726155244940.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726155332399.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726155604304.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726155947968.png">
+<meta property="article:published_time" content="2025-07-26T06:35:00.000Z">
+<meta property="article:modified_time" content="2025-07-26T08:03:25.532Z">
+<meta property="article:author" content="SHENQI">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726145305430.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/web-app-manifest-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Machine-learning-2 (Hung-yi)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/26/machine-learning-1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/26/machine-learning-2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&text=Machine-learning-2 (Hung-yi)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&is_video=false&description=Machine-learning-2 (Hung-yi)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine-learning-2 (Hung-yi)&body=Check out this article: https://qshen0629.github.io/2025/07/26/machine-learning-2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&name=Machine-learning-2 (Hung-yi)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/26/machine-learning-2/&t=Machine-learning-2 (Hung-yi)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A02"><span class="toc-number">1.</span> <span class="toc-text">序章2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%9B%B4%E5%A5%BD%E7%9A%84Model"><span class="toc-number">1.1.</span> <span class="toc-text">选择更好的Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%86%E6%AE%B5%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E6%98%AF%E7%94%B1%E5%B8%B8%E6%95%B0%E5%8A%A0%E4%B8%8A%E5%A4%9A%E6%AE%B5%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E7%BB%84%E6%88%90%E7%9A%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.分段线性函数是由常数加上多段线性函数组成的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E8%B6%B3%E5%A4%9F%E5%A4%9A%E7%9A%84%E8%93%9D%E8%89%B2%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E5%8E%BB%E9%80%BC%E8%BF%91%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E8%A1%A8%E7%A4%BA%E3%80%82"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8F%8D%E4%B9%8B%E4%B9%9F%E5%8F%AF%E4%BB%A5%EF%BC%8C%E4%B8%8B%E9%9D%A2%E9%82%A3%E4%B8%AA%E6%98%AFsigmoid%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.反之也可以，下面那个是sigmoid函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8Dsigmoid-fuction-%E7%9A%84%E5%90%84%E7%A7%8D%E5%8F%98%E4%BD%93%E6%9D%A5%E9%80%BC%E8%BF%91hard-sigmoid"><span class="toc-number">1.1.4.</span> <span class="toc-text">4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.5.</span> <span class="toc-text">4.模型总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97loss"><span class="toc-number">1.2.</span> <span class="toc-text">计算loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch"><span class="toc-number">1.3.</span> <span class="toc-text">Batch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReLU"><span class="toc-number">1.4.</span> <span class="toc-text">ReLU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Learning"><span class="toc-number">1.5.</span> <span class="toc-text">Deep Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Overfitting"><span class="toc-number">1.6.</span> <span class="toc-text">Overfitting</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Machine-learning-2 (Hung-yi)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">SHENQI</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-26T06:35:00.000Z" class="dt-published" itemprop="datePublished">2025-07-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/machine-learning/" rel="tag">machine learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="序章2"><a href="#序章2" class="headerlink" title="序章2"></a>序章2</h2><p>序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models）</p>
+<p>源自模型自身限制的缺陷称作： <em><strong>Model Bias</strong></em></p>
+<h3 id="选择更好的Model"><a href="#选择更好的Model" class="headerlink" title="选择更好的Model"></a>选择更好的Model</h3><h4 id="1-分段线性函数是由常数加上多段线性函数组成的"><a href="#1-分段线性函数是由常数加上多段线性函数组成的" class="headerlink" title="1.分段线性函数是由常数加上多段线性函数组成的"></a>1.分段线性函数是由常数加上多段线性函数组成的</h4><p><img src="/2025/07/26/machine-learning-2/image-20250726145305430.png" alt="image-20250726145305430"></p>
+<h4 id="2-使用足够多的蓝色线性函数可以去逼近非线性函数表示。"><a href="#2-使用足够多的蓝色线性函数可以去逼近非线性函数表示。" class="headerlink" title="2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。"></a>2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。</h4><p><img src="/2025/07/26/machine-learning-2/image-20250726145459821.png" alt="image-20250726145459821"></p>
+<h4 id="3-反之也可以，下面那个是sigmoid函数"><a href="#3-反之也可以，下面那个是sigmoid函数" class="headerlink" title="3.反之也可以，下面那个是sigmoid函数"></a>3.反之也可以，下面那个是sigmoid函数</h4><p><img src="/2025/07/26/machine-learning-2/image-20250726145920813.png" alt="image-20250726145920813"></p>
+<h4 id="4-使用各种sigmoid-fuction-的各种变体来逼近hard-sigmoid"><a href="#4-使用各种sigmoid-fuction-的各种变体来逼近hard-sigmoid" class="headerlink" title="4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid"></a>4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid</h4><p><img src="/2025/07/26/machine-learning-2/image-20250726150127279.png" alt="image-20250726150127279"></p>
+<p>可以类似得 ：</p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726150138281.png" alt="image-20250726150138281"></p>
+<p>三个加起来可得：$y&#x3D;b+\displaystyle\sum_i^3c_isigmoid(b_i+w_ix_1)$</p>
+<hr>
+<h4 id="4-模型总结"><a href="#4-模型总结" class="headerlink" title="4.模型总结"></a>4.模型总结</h4><p>经过上面的操作和上一节中对多个日期的考虑可得总结后的function：$y&#x3D;b+\displaystyle\sum_ic_isigmoid(b_i+\displaystyle\sum_jw_{ij}x_i)$ 其中j是对日期的考虑，而i是对多个sigmoid函数的操作。</p>
+<p>附图方便理解：</p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726151242993.png" alt="image-20250726151242993"></p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726151421291.png" alt="image-20250726151421291"></p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726151543618.png" alt="image-20250726151543618"></p>
+<p><img src="/image-20250726151657014.png" alt="image-20250726151657014"></p>
+<h3 id="计算loss"><a href="#计算loss" class="headerlink" title="计算loss"></a>计算loss</h3><p>将所有未知数合$W,b(向量),c^T,b(常数)$在一起表示为未知数 <strong>$\theta$</strong> ，计算损失：$L(\theta)$</p>
+<p>假设$\theta$有1000个,那么gradient就有1000行<img src="/image-20250726154424265.png" alt="image-20250726154424265"></p>
+<p>对g的优化也是一样的， 计算对每个$\theta$ 的偏微分<img src="/2025/07/26/machine-learning-2/image-20250726154621237.png" alt="image-20250726154621237"></p>
+<p>（注意这里的 $\theta^0$ 是有1000个参数的） </p>
+<p>不断优化即可</p>
+<h3 id="Batch"><a href="#Batch" class="headerlink" title="Batch"></a>Batch</h3><p>在计算loss时会使用到batch，按照一个batch一个batch进行更新参数， </p>
+<p><em>1 <strong>epoch</strong> &#x3D; <strong>see all the batchs once</strong></em></p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726154924298.png" alt="image-20250726154924298"></p>
+<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p>关于最处的函数处理其实不是只有sigmoid，还有Rectifued Linear Unit（ReLU）表示为 $c \max(0,b+wx_1)$</p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726155244940.png" alt="image-20250726155244940"></p>
+<p>常常用作激活函数</p>
+<p>Sigmoid –&gt; ReLU 需要两倍的ReLU，因为一个hard Sigmod需要两个ReLU来表示。</p>
+<p> <img src="/2025/07/26/machine-learning-2/image-20250726155332399.png" alt="image-20250726155332399"></p>
+<h3 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h3><p>Deep &#x3D; Many hidden layers haha :)</p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726155604304.png" alt="image-20250726155604304"></p>
+<h3 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h3><p>在训练资料上变得很好，但是在测试资料上效果不好</p>
+<p><img src="/2025/07/26/machine-learning-2/image-20250726155947968.png" alt="image-20250726155947968"></p>
+<p>应该选三层的，<strong>我们关注的应该是测试资料上的</strong></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A02"><span class="toc-number">1.</span> <span class="toc-text">序章2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%9B%B4%E5%A5%BD%E7%9A%84Model"><span class="toc-number">1.1.</span> <span class="toc-text">选择更好的Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%86%E6%AE%B5%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E6%98%AF%E7%94%B1%E5%B8%B8%E6%95%B0%E5%8A%A0%E4%B8%8A%E5%A4%9A%E6%AE%B5%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E7%BB%84%E6%88%90%E7%9A%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.分段线性函数是由常数加上多段线性函数组成的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E8%B6%B3%E5%A4%9F%E5%A4%9A%E7%9A%84%E8%93%9D%E8%89%B2%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E5%8E%BB%E9%80%BC%E8%BF%91%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E8%A1%A8%E7%A4%BA%E3%80%82"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8F%8D%E4%B9%8B%E4%B9%9F%E5%8F%AF%E4%BB%A5%EF%BC%8C%E4%B8%8B%E9%9D%A2%E9%82%A3%E4%B8%AA%E6%98%AFsigmoid%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.反之也可以，下面那个是sigmoid函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8Dsigmoid-fuction-%E7%9A%84%E5%90%84%E7%A7%8D%E5%8F%98%E4%BD%93%E6%9D%A5%E9%80%BC%E8%BF%91hard-sigmoid"><span class="toc-number">1.1.4.</span> <span class="toc-text">4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.5.</span> <span class="toc-text">4.模型总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97loss"><span class="toc-number">1.2.</span> <span class="toc-text">计算loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch"><span class="toc-number">1.3.</span> <span class="toc-text">Batch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReLU"><span class="toc-number">1.4.</span> <span class="toc-text">ReLU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Learning"><span class="toc-number">1.5.</span> <span class="toc-text">Deep Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Overfitting"><span class="toc-number">1.6.</span> <span class="toc-text">Overfitting</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/26/machine-learning-2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&text=Machine-learning-2 (Hung-yi)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&is_video=false&description=Machine-learning-2 (Hung-yi)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine-learning-2 (Hung-yi)&body=Check out this article: https://qshen0629.github.io/2025/07/26/machine-learning-2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&title=Machine-learning-2 (Hung-yi)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/26/machine-learning-2/&name=Machine-learning-2 (Hung-yi)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/26/machine-learning-2/&t=Machine-learning-2 (Hung-yi)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    SHENQI
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
