@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="教程 致谢此内容为 Yiming Li 老师的科研经验分享，能帮助刚开始进行人工智能方向科研的同学迅速了解领域内的基础知识、掌握基本的科研方法，故而摘录至此，供大家一起学习！  深度学习的理论基础 李宏毅机器学习课程: 2&#x2F;18，2&#x2F;25，3&#x2F;04，3&#x2F;25，4&#x2F;22，4&#x2F;29这几天的课程。建议完成布置的作业并听助教的HW讲解，在5天之内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tutorial (from Yiming Li)">
+<meta property="og:url" content="https://qshen0629.github.io/2025/07/26/tutorial/index.html">
+<meta property="og:site_name" content="SHEN&#39;s Blog">
+<meta property="og:description" content="教程 致谢此内容为 Yiming Li 老师的科研经验分享，能帮助刚开始进行人工智能方向科研的同学迅速了解领域内的基础知识、掌握基本的科研方法，故而摘录至此，供大家一起学习！  深度学习的理论基础 李宏毅机器学习课程: 2&#x2F;18，2&#x2F;25，3&#x2F;04，3&#x2F;25，4&#x2F;22，4&#x2F;29这几天的课程。建议完成布置的作业并听助教的HW讲解，在5天之内">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/tutorial/image.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/26/tutorial/image1.png">
+<meta property="article:published_time" content="2025-07-26T06:35:00.000Z">
+<meta property="article:modified_time" content="2025-07-27T15:34:19.697Z">
+<meta property="article:author" content="SHEN Qi">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="tutorial">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qshen0629.github.io/2025/07/26/tutorial/image.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/web-app-manifest-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>tutorial (from Yiming Li)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/07/26/machine-learning-2/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/26/machine-learning-1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/26/tutorial/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/26/tutorial/&text=tutorial (from Yiming Li)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/26/tutorial/&is_video=false&description=tutorial (from Yiming Li)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=tutorial (from Yiming Li)&body=Check out this article: https://qshen0629.github.io/2025/07/26/tutorial/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/26/tutorial/&name=tutorial (from Yiming Li)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/26/tutorial/&t=tutorial (from Yiming Li)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">深度学习的理论基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">深度学习的代码基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%91%E7%A0%94%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">科研基础</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        tutorial (from Yiming Li)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">SHEN Qi</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-26T06:35:00.000Z" class="dt-published" itemprop="datePublished">2025-07-26</time>
+        
+        (Updated: <time datetime="2025-07-27T15:34:19.697Z" class="dt-updated" itemprop="dateModified">2025-07-27</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/machine-learning/" rel="tag">machine learning</a>, <a class="p-category" href="/tags/tutorial/" rel="tag">tutorial</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><blockquote>
+<p><strong>致谢</strong><br>此内容为 <strong>Yiming Li</strong> 老师的科研经验分享，能帮助刚开始进行<strong>人工智能方向科研</strong>的同学迅速了解领域内的基础知识、掌握基本的科研方法，故而摘录至此，供大家一起学习！</p>
+</blockquote>
+<h2 id="深度学习的理论基础"><a href="#深度学习的理论基础" class="headerlink" title="深度学习的理论基础"></a><strong>深度学习的理论基础</strong></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/ml/2022-spring.php">李宏毅机器学习课程</a>: 2&#x2F;18，2&#x2F;25，3&#x2F;04，3&#x2F;25，4&#x2F;22，4&#x2F;29这几天的课程。建议完成布置的作业并听助教的HW讲解，<strong>在5天之内完成这个课程</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av926316362/?from=search&seid=15419922455691149181&spm_id_from=333.337.0.0&vd_source=d29796ceb59f8d39c6e11133e20b5fd2">吴恩达深度学习课程</a>: 和上面的课程有一些重复，可以用来速刷查漏补缺，建议<strong>在2天之内完成这个课程</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/amusi/Deep-Learning-Interview-Book">深度学习面试宝典</a>: 数学、机器学习、深度学习、计算机视觉、传统图像处理，<strong>建议2天内完成理解和记忆</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Gb4y1X7Q5/?vd_source=3294df0eb1e55067c5c7ca87b79f01b7">斯坦福视觉课CS231n</a>：速刷，查漏补缺，建议<strong>在3天之内完成这个课程</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ">李宏毅LLM &amp; Diffusion Model课程</a>：推荐快速过完Youtube上LLM和Diffusion相关的课程，不懂的建议结合代码和知乎解读等学习。</li>
+</ol>
+<h2 id="深度学习的代码基础"><a href="#深度学习的代码基础" class="headerlink" title="深度学习的代码基础"></a><strong>深度学习的代码基础</strong></h2><ol>
+<li><strong>Python基础</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wW411Y7ai">Python基础教程</a>、<a target="_blank" rel="noopener" href="https://cs231n.github.io/python-numpy-tutorial/">numpy基础</a></li>
+<li><strong>Jupyter Notebook:</strong> <a target="_blank" rel="noopener" href="https://www.dataquest.io/blog/jupyter-notebook-tutorial/">Jupyter Notebook英文教程</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/noticeable/p/9010881.html">中文教程</a> (<strong>需要学会如何在远程服务器上搭建Notebook</strong>)</li>
+<li><strong>Pytorch</strong>: <a target="_blank" rel="noopener" href="https://pytorch.org/tutorials/beginner/basics/intro.html">官方教程</a> (可以自行寻找中文版学习)、<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hE411t7RN/?spm_id_from=333.999.0.0&vd_source=d29796ceb59f8d39c6e11133e20b5fd2">小土堆教程</a></li>
+<li><strong>Anaconda</strong>: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32925500">知乎教程</a>（<strong>重点掌握如何下载、安装、创建环境、激活环境、安装需要的库、删除环境</strong>）</li>
+<li><strong>Linux</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zx411E7KH/?vd_source=d29796ceb59f8d39c6e11133e20b5fd2">bilibili教程</a> (<strong>重点掌握基本的命令和如何使用screen等任务后台管理、FileZilla等文件传输工具</strong>)</li>
+<li><strong>Git</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HM411377j/?vd_source=d29796ceb59f8d39c6e11133e20b5fd2">bilibili教程</a>（<strong>重点掌握如何进行版本控制</strong>）</li>
+</ol>
+<h2 id="科研基础"><a href="#科研基础" class="headerlink" title="科研基础"></a><strong>科研基础</strong></h2><ol>
+<li>了解Google Scholar (如何进行高级搜索、订阅)、arXiv (如何进行搜索、订阅、Connected Papers)、Semantic Scholar的基本使用</li>
+<li>不会的东西优先学会使用GPT、Google、Wiki、知乎、CSDN等资源查找相关的信息，实在不行再去问别人 <a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">《提问的智慧》</a></li>
+<li><strong>文献的阅读和记笔记方式</strong>：从abstract读到intro，再读到方法和实验。读的时候按照顺序思考并回答如下问题：<ol>
+<li>作者旨在做什么事（1句话）</li>
+<li>这件事的难点在哪里（1-2句话）</li>
+<li>宏观角度来说，作者是怎么解决的（1-2句话）</li>
+<li>作者的方法技术细节</li>
+<li><strong>所提的方法为什么有效</strong></li>
+<li>作者做了哪些重要实验来支持他的观点</li>
+<li>作者的主要贡献是什么</li>
+<li>这个工作还有什么（潜在的）缺陷和可以改进的地方</li>
+</ol>
+</li>
+<li><strong>文献的记录和管理方式：</strong><a target="_blank" rel="noopener" href="https://e1jemfbstnw.feishu.cn/sheets/MQ3JsvgWxhLOH2twgkwcuhVHnig">文献记录和管理模板</a> 、<a target="_blank" rel="noopener" href="https://e1jemfbstnw.feishu.cn/sheets/Cq5csp2rjhyi4qthoHHcnB5knXe">学习到的搭配和表达</a></li>
+<li><strong>Latex:</strong> <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Z24y157GM/">bilibili教程</a>、<a target="_blank" rel="noopener" href="https://www.tablesgenerator.com/">tablesgenerator</a>、注册并了解overleaf的基本使用</li>
+<li><strong>基本的PPT制作</strong>: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/355268035">Beamer知乎介绍</a>、<a target="_blank" rel="noopener" href="https://www.overleaf.com/gallery/tagged/presentation">Beamer Overleaf模板</a>、<a target="_blank" rel="noopener" href="https://e1jemfbstnw.feishu.cn/file/JFR3bXnbNo9gssxwRQTcz1Dgn9c">PPT模板及示例.pptx</a><ol>
+<li><strong>中文一律宋体，英文一律Times New Roman字体</strong></li>
+<li><strong>确保易读性</strong>：字体不能过小、每页字不能太多、图表下方要配有简单的结果解释、整体需要图文并茂</li>
+<li>一般不允许使用具有图片堆叠的动画，保证导出PDF时PPT依旧正常</li>
+<li>图片、表格需要有标题。涉及到参考文献的需要设置引用；参考文献放在本页PPT的最下方；</li>
+</ol>
+</li>
+<li><strong>如何高效的撰写（双）周报：<a target="_blank" rel="noopener" href="https://e1jemfbstnw.feishu.cn/docx/T6FldZVnNoVw0Hx2gkZcRzlGnsb?from=from_copylink">周报模板</a></strong><ol>
+<li>所有周报在一个文档内，把<strong>最新一期的内容放在文档最上方</strong>（整体而言，周报文档是按照时间顺序倒序的）</li>
+<li>请把周报命名为’周报-name’ (e.g., ‘周报-何俊涛’)</li>
+<li>请注意内容的可读性（排版、语言等）</li>
+<li>需要包括足够的细节，例如重要实验的结果等</li>
+<li><strong>如果有针对具体研究课题的讨论，请在讨论结束后半天内把讨论的内容总结到周报中，并把链接发我核对。具体需要总结的内容有：本次讨论的细节以及讨论后定下来的未来工作安排</strong></li>
+<li><strong>每周六晚上10点提交，时间跨度为上周六到本周六 (建议提前定好闹钟，不然很容易忘)</strong></li>
+<li><strong>请把周报的权限改为‘互联网上获得链接的人可阅读’，并通过微信将周报的链接私发给我</strong></li>
+<li>请保持周报包含<strong>足够多信息的同时做到尽量简洁</strong>，周报同时是我对大家课题的一个备忘录。基于这个考量，一些<strong>与科研课题无关的信息请不要详细展开</strong>，例如，论文的阅读笔记啥的可以放在别的doc里，只需要说你读了论文，笔记丢个链接在这就行（当然，放不放笔记链接完全是你的自由）</li>
+</ol>
+</li>
+<li><strong>如何进行高效的汇报和会议</strong><ol>
+<li>汇报、会议、论文的本质都是向其他人快速传递信息，因此<strong>整体而言是一个总分结构</strong> (具体的参考模板见下)</li>
+<li>**汇报论文的时候：**今天讲哪几篇–&gt;为什么要讲这几篇–&gt;[论文研究的问题–&gt;论文的motivations (及难点)–&gt;概括的说这篇论文是怎么解决这个问题的–&gt;论文的核心贡献–&gt;方法的具体细节–&gt;方法为什么有效–&gt;能支撑论文观点的实验+你觉得有必要讲、学习的相关实验]–&gt;这篇工作有什么潜在缺陷–&gt;从中学习到了什么，下一步有什么打算（e.g., 改进它）</li>
+<li>**汇报实验的时候：**做了什么实验–&gt;为什么要做这些实验（+我们期待看到什么样的结果）–&gt;实验有哪些结果–&gt;这些结果说明了什么–&gt;目前遇到了什么障碍&#x2F;困难&#x2F;需要讨论的独特现象–&gt;下一步的计划</li>
+<li><strong>高效会议</strong><ol>
+<li>会前至少一天按照上述要求做好PPT，并将其发到群里</li>
+<li>会议前提前准备，自己先过一遍PPT，不要到时候讲的磕磕绊绊</li>
+<li>与会议当前主题无关的事情放到整体会议结束后再讲</li>
+<li>每个人的论文和实验汇报都尽量控制在30分钟以内，做到富有信息量且简洁</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>如何进行文献调研</strong><ol>
+<li><strong>目标</strong><ol>
+<li>找到需要调研方向的<strong>全部</strong>相关文献（包括已正式发表、arXiv、ICLR Submission等）</li>
+<li>找到目前的<strong>state-of-the-art</strong>方法<ol>
+<li>最好能把现有的方法按照性能从高到低进行排序（按照你总结和了解的）</li>
+<li>要注意，有的方法效果可能并不稳定，它们在自己文章中报告的可能只是特定参数下调出来的最佳值。因此，你需要多参考几篇论文的实验来更加全面的了解各个方法（e.g., 论文中的baselines）的<strong>实际效果</strong>和**稳定性，**而不是简单的就看一下最新的论文中的实验结果。当然了，越新的顶会&#x2F;顶刊&#x2F;顶组的工作的参考价值越大</li>
+</ol>
+</li>
+<li><strong>技术路线</strong>和<strong>演化方式</strong><ol>
+<li>总结和提炼每篇论文的核心方法设计</li>
+<li>讲清楚各篇论文的演化过程。具体来说，你需要回答：现有的方法按照技术路线可以被划分为哪几类，每类里面有哪些论文，各类中的论文是怎么发展的。简单的来说这部分的分析类似于你在写论文中的related work章节</li>
+</ol>
+</li>
+<li><strong>优缺点</strong>: 每篇论文有什么优点和缺点。具体的，一般优点论文里面都写得很清楚，缺点需要参考别的论文的说法和自己去深入思考</li>
+<li><strong>实验设计</strong>：用了什么数据集、什么评价指标、做的什么模型架构、做了哪些类型的实验等</li>
+</ol>
+</li>
+<li><strong>步骤</strong><ol>
+<li>选定<strong>准确</strong>且<strong>全面</strong>的关键词（列表）。你可能在读论文的过程中发现更多相关的关键词，逐步加进你的检索列表即可</li>
+<li>使用<a target="_blank" rel="noopener" href="https://scholar.google.com/"><strong>谷歌学术</strong></a>基于你的关键词进行检索。你可能会需要用到高级检索功能，如果你有多个关键词需要检索</li>
+<li>从最高被引的论文、最新的顶会顶刊论文开始阅读。特别的，如果有合适的综述性论文可以最先从它开始。<ol>
+<li>先快速浏览谷歌学术中使用关键词列出的<strong>所有</strong>文献的标题和摘要，筛选出和需要调研主题相关的论文</li>
+<li>在详细阅读全文之前，先阅读论文的引言和结论部分，以判断该论文是否适合深入研究。在阅读引言的过程中，你也许能找到该论文对已有工作的优缺点分析、本文方法的优点</li>
+<li>阅读相关工作部分，根据它们的引用去寻找（这篇论文发表之前）待调研领域的相关工作。此时你也许能找到该论文对已有工作的优缺点分析、现有工作的技术路线和演化等</li>
+<li>阅读论文的方法部分，尤其是pipeline图及其caption对应的部分，总结本文的主要技术、分析该方法的潜在缺点</li>
+<li>阅读论文的实验部分，分析它们的实验设计和现有工作的性能</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>参考模板：<a target="_blank" rel="noopener" href="https://e1jemfbstnw.feishu.cn/sheets/UAz6sxrljhnfbLthA5Cc8dWYn8d?from=from_copylink">论文调研参考模板</a></strong></li>
+</ol>
+</li>
+<li><strong>如何进行高效的时间和任务管理</strong><ol>
+<li>提前维护一个长期的（建议一个学期）to-do list，把重要的任务及其时间节点都列在上面</li>
+<li>针对每个重要任务基于子任务进行拆分，根据DDL来定一个每个子任务的时间，形成一个整体的schedule。<strong>记得打好提前量</strong>，不要时间正好卡DDL，不然万一中途有什么事这个任务就逾期了</li>
+<li>建议维护一个短期的（一个月）的时间表，按照每小时&#x2F;每半小时进行拆分，规划好一周内每天的时间。<strong>记得给自己留出足够的休息时间</strong>。</li>
+<li>学会使用备忘录，推荐’高效Todo’APP</li>
+<li>可以使用一些辅助工具来监督学习，例如Qbserve、番茄钟等</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.feishu.cn/hc/zh-CN/category/6933474571051859996-%E6%96%B0%E6%89%8B%E5%BC%95%E5%AF%BC">飞书的基本使用</a>：重点学习云文档、任务、会议、飞书汇报</li>
+<li><strong>什么是好的研究？</strong><ol>
+<li>定义、解决了一个新（<strong>且重要</strong>）的问题</li>
+<li>推动、改变了一个潮流或认识（i.e., inspiring、unexpected、fancy的研究）</li>
+<li>简单而不平凡 (大道至简): simple yet effective methods <strong>with deep insights or even theoretical supports</strong>.</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/07/26/tutorial/image.png" alt="image.png"></p>
+<p><img src="/2025/07/26/tutorial/image1.png" alt="image.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">深度学习的理论基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">深度学习的代码基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%91%E7%A0%94%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">科研基础</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/26/tutorial/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/26/tutorial/&text=tutorial (from Yiming Li)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/26/tutorial/&is_video=false&description=tutorial (from Yiming Li)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=tutorial (from Yiming Li)&body=Check out this article: https://qshen0629.github.io/2025/07/26/tutorial/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/26/tutorial/&title=tutorial (from Yiming Li)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/26/tutorial/&name=tutorial (from Yiming Li)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/26/tutorial/&t=tutorial (from Yiming Li)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    SHEN Qi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
