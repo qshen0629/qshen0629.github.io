@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Home Work 1这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader Dataset就是存数据结构的  Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 -  1dataset &#x3D; MyDataset(file)  -    1dataloader &#x3D; DataLoader(dataset,b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine learning 3 (Hungyi Lee)">
+<meta property="og:url" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/index.html">
+<meta property="og:site_name" content="SHEN&#39;s Blog">
+<meta property="og:description" content="Home Work 1这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader Dataset就是存数据结构的  Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 -  1dataset &#x3D; MyDataset(file)  -    1dataloader &#x3D; DataLoader(dataset,b">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250728233610507.png">
+<meta property="article:published_time" content="2025-07-28T14:31:00.000Z">
+<meta property="article:modified_time" content="2025-07-28T17:19:45.647Z">
+<meta property="article:author" content="SHEN Qi">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250728233610507.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/web-app-manifest-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Machine learning 3 (Hungyi Lee)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1D8C2J9ZN"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E1D8C2J9ZN');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+    <script async defer
+            data-website-id="4490dbb5-ee58-413d-8840-7508f7ef4ed8"
+            src="https://analytics.domain.com/umami.js">
+    </script>
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/27/tutorial/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&text=Machine learning 3 (Hungyi Lee)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&is_video=false&description=Machine learning 3 (Hungyi Lee)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine learning 3 (Hungyi Lee)&body=Check out this article: https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&name=Machine learning 3 (Hungyi Lee)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/&t=Machine learning 3 (Hungyi Lee)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Machine learning 3 (Hungyi Lee)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">SHEN Qi</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-28T14:31:00.000Z" class="dt-published" itemprop="datePublished">2025-07-28</time>
+        
+        (Updated: <time datetime="2025-07-28T17:19:45.647Z" class="dt-updated" itemprop="dateModified">2025-07-29</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/machine-learning/" rel="tag">machine learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Home-Work-1"><a href="#Home-Work-1" class="headerlink" title="Home Work 1"></a>Home Work 1</h2><p>这个是hungyi老师助教的pytorch教程，简单记录一下。</p>
+<h3 id="Dataset-Dataloader"><a href="#Dataset-Dataloader" class="headerlink" title="Dataset &amp; Dataloader"></a><code>Dataset</code> &amp; <code>Dataloader</code></h3><ul>
+<li><p><code>Dataset</code>就是存数据结构的</p>
+</li>
+<li><p><code>Dataloader</code>是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。</p>
+<p>- </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset = MyDataset(file)</span><br></pre></td></tr></table></figure>
+
+<p>- </p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataloader = DataLoader(dataset,batch_size,shuffle=True)</span><br></pre></td></tr></table></figure>
+
+<p>  其中<font color=red><strong><code>shuffle</code></strong></font>在training的时候设置为True，在testing的时候设置为False</p>
+</li>
+<li><p>如何构建<code>Dataset</code>和<code>Dataloader</code></p>
+<ul>
+<li><pre><code class="language-python">from torch.utils.data import Dataset, Dataloader
+
+class Mydataset(Dataset):
+    # 读取数据和做预处理
+    def __init__(self, file):
+        self.data = ...
+        
+    # 一次返回一个样例
+    def __getten__(self, index)：
+        return self.data[index]
+    
+    # 返回数据集的大小
+    def __len__(self):
+        return len(self.data)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - `Dataloader`的作用就是从`Dataset`中每次调用 `__getten__(i)`然后组成一个mini-batch(大小为`batch_size`)</span><br><span class="line"></span><br><span class="line">    ![image-20250728230559384](image-20250728230559384.png)</span><br><span class="line"></span><br><span class="line">### Tensors</span><br><span class="line"></span><br><span class="line">- 简单来说就是高纬的数据结构</span><br><span class="line"></span><br><span class="line">  ![image-20250728231044647](image-20250728231044647.png)</span><br><span class="line"></span><br><span class="line">- 查看tensor的维度：`tensor.shape()`</span><br><span class="line"></span><br><span class="line">  ![image-20250728231239106](image-20250728231239106.png)</span><br><span class="line"></span><br><span class="line">- 创建Tensors</span><br><span class="line"></span><br><span class="line">  - 可以直接从numpy或者list创建</span><br><span class="line"></span><br><span class="line">    - ```python</span><br><span class="line">      x = torch.tensor([[1,-1],[1,-1]])</span><br><span class="line">      x = torch.from_numpy(np.arry([[1,-1],[1,-1]]))</span><br><span class="line">      /*</span><br><span class="line">      	tensor([[1., -1.],</span><br><span class="line">                 [1., -1.]])</span><br><span class="line">      */</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>创建全为0或者全为1的</p>
+<ul>
+<li><pre><code class="language-python">x = torch.zeros([2,2]) // shape
+/*
+    tensor([[0., 0.],
+           [0., 0.]])
+*/
+x = torch.ones([1,2,5])
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 经典的操作</span><br><span class="line"></span><br><span class="line">  - Addition </span><br><span class="line"></span><br><span class="line">    - z = x + y</span><br><span class="line"></span><br><span class="line">  - Subtraction </span><br><span class="line"></span><br><span class="line">    - z = x - y</span><br><span class="line"></span><br><span class="line">  - Power </span><br><span class="line"></span><br><span class="line">    - y = x.pow(2)</span><br><span class="line"></span><br><span class="line">  - Summation </span><br><span class="line"></span><br><span class="line">    - y = x.sum()</span><br><span class="line"></span><br><span class="line">  - Mean </span><br><span class="line"></span><br><span class="line">    - y = x.mean()</span><br><span class="line"></span><br><span class="line">  - 转置 transpose</span><br><span class="line"></span><br><span class="line">    ```python</span><br><span class="line">    &gt;&gt;&gt; x = torch.zeros([2,3])</span><br><span class="line">    &gt;&gt;&gt; x.shape</span><br><span class="line">    torch.Size([2, 3])</span><br><span class="line">    &gt;&gt;&gt; x</span><br><span class="line">    tensor([[0., 0., 0.],</span><br><span class="line">            [0., 0., 0.]])</span><br><span class="line">    &gt;&gt;&gt; x = x.transpose(0,1) // 交换dim = 0 和 dim = 1</span><br><span class="line">    &gt;&gt;&gt; x.shape</span><br><span class="line">    torch.Size([3, 2])</span><br><span class="line">    &gt;&gt;&gt; x</span><br><span class="line">    tensor([[0., 0.],</span><br><span class="line">            [0., 0.],</span><br><span class="line">            [0., 0.]])</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>添加 or 删除维度，这并不会导致信息的丢失，只是改变维度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.squeeze(<span class="number">0</span>) // dim = <span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.unsqueeze(<span class="number">1</span>) // 在原来的dim = <span class="number">1</span>的位置添加一个维度</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接多个维度的tensors</p>
+<p><img src="/2025/07/28/machine-learning-3/image-20250728233610507.png" alt="image-20250728233610507"></p>
+</li>
+</ul>
+</li>
+<li><p>数据类型</p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>dtype</th>
+<th>tensor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>32bit 浮点数</td>
+<td>torch.float</td>
+<td>torch.FloatTensor</td>
+</tr>
+<tr>
+<td>64bit 带符号整数</td>
+<td>torch.long</td>
+<td>torch.LongTensor</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>选择device</p>
+<ul>
+<li><pre><code class="language-python">torch.cuda.is_available() // 查看是否有GPU
+X = x.to(&#39;cpu&#39;)
+X = x.to(&#39;cuda&#39;)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Gradient Calculation 计算梯度</span><br><span class="line"></span><br><span class="line">  - 直接放图吧</span><br><span class="line"></span><br><span class="line">    ![image-20250728234225896](image-20250728234225896.png)</span><br><span class="line"></span><br><span class="line">### 搭建模型</span><br><span class="line"></span><br><span class="line">- network layers</span><br><span class="line"></span><br><span class="line">  - 例如全连接层：`nn.Liner(in_features, out_features)`就是只需要定义&lt;font color=red&gt;最后一个输入维度和输出维度&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">    ![image-20250728234932223](image-20250728234932223.png)</span><br><span class="line"></span><br><span class="line">  - 还有`nn.Sigmoid(), nn.ReLU()`</span><br><span class="line"></span><br><span class="line">- build own neural network</span><br><span class="line"></span><br><span class="line">  - 很简单的例子：</span><br><span class="line"></span><br><span class="line">    ![image-20250728235100395](image-20250728235100395.png)</span><br><span class="line"></span><br><span class="line">    -    等价写法</span><br><span class="line"></span><br><span class="line">         ![image-20250728235227843](image-20250728235227843.png)</span><br><span class="line"></span><br><span class="line">### 计算损失</span><br><span class="line"></span><br><span class="line">- 类别</span><br><span class="line">  - MSE 用于回归任务 `criterion = nn.MSELoss()`</span><br><span class="line">  - Cross Entropy 用于分类任务 `criterion = nn.CrossEntropyLoss()`</span><br><span class="line">- 计算loss很简单：`loss = criterion(model_output, labels)`</span><br><span class="line"></span><br><span class="line">### 选择优化方法</span><br><span class="line"></span><br><span class="line">- 作业是&lt;font color=red&gt;只用了梯度下降法&lt;/font&gt;:</span><br><span class="line">  Stochastic Gradient Descent(SGS): `torch.optim.SGD(model.parameters(), lr, momentum = 0)`</span><br><span class="line"></span><br><span class="line">- for every batch of data:</span><br><span class="line">  1. call `optimizer.zero_grad()` to **reset gradients** of model parameters.</span><br><span class="line">  2. call `loss.backward()` to **backpropagate gradients** of prediction loss.</span><br><span class="line">  3. call `optimizer.step()` to **adjust** model parameters.</span><br><span class="line"></span><br><span class="line">![image-20250729000214474](image-20250729000214474.png)</span><br><span class="line"></span><br><span class="line">### 完整的流程</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">dataset = MyDataset(file) # read data via MyDataset</span><br><span class="line">tr_set = DataLoader(dataset, 16, shuffle=True) # put dataset into Dataloader</span><br><span class="line">model = MyModel().to(device) # construct model and move to device (cpu/cuda)</span><br><span class="line">criterion = nn.MSELoss() # set loss function</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), 0.1) # set optimizer</span><br><span class="line"></span><br><span class="line"># training</span><br><span class="line">for epoch in range(n_epochs): # iterate n_epochs</span><br><span class="line">    model.train() # set model to train mode</span><br><span class="line">    for x, y in tr_set: # iterate through the dataloader</span><br><span class="line">        optimizer.zero_grad() # set gradient to zero</span><br><span class="line">        x, y = x.to(device), y.to(device) # move data to device (cpu/cuda)</span><br><span class="line">        pred = model(x) # forward pass (compute output)</span><br><span class="line">        loss = criterion(pred, y) # compute loss</span><br><span class="line">        loss.backward() # compute gradient (backpropagation)</span><br><span class="line">        optimizer.step() # update model with optimizer</span><br><span class="line"></span><br><span class="line"># testing</span><br><span class="line">model.eval() # set model to evaluation mode</span><br><span class="line">total_loss = 0</span><br><span class="line">for x, y in dv_set: # iterate through the dataloader</span><br><span class="line">    x, y = x.to(device), y.to(device) # move data to device (cpu/cuda)</span><br><span class="line">    with torch.no_grad(): # disable gradient calculation</span><br><span class="line">        pred = model(x) # forward pass (compute output)</span><br><span class="line">        loss = criterion(pred, y) # compute loss</span><br><span class="line">    total_loss += loss.cpu().item() * len(x) # accumulate loss</span><br><span class="line">    avg_loss = total_loss / len(dv_set.dataset) # compute averaged loss</span><br><span class="line"></span><br><span class="line"># predicating</span><br><span class="line">model.eval()</span><br><span class="line">preds = []</span><br><span class="line">for x in tt_set: # iterate through the dataloader</span><br><span class="line">    x = x.to(device) </span><br><span class="line">    with torch.no_grad(): # disable gradient calculation</span><br><span class="line">        pred = model(x) # forward pass (compute output)</span><br><span class="line">        preds.append(pred.cpu()) # collect prediction</span><br><span class="line">        </span><br><span class="line"># save</span><br><span class="line">torch.save(model.state_dict(), path)</span><br><span class="line"># load</span><br><span class="line">ckpt = torch.load(path)</span><br><span class="line">model.load_state_dict(ckpt)</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&text=Machine learning 3 (Hungyi Lee)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&is_video=false&description=Machine learning 3 (Hungyi Lee)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine learning 3 (Hungyi Lee)&body=Check out this article: https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&name=Machine learning 3 (Hungyi Lee)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/&t=Machine learning 3 (Hungyi Lee)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    SHEN Qi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
