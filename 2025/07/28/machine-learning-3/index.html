@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="Home Work 1这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader Dataset就是存数据结构的  Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 1dataset &#x3D; MyDataset(file)  1dataloader &#x3D; DataLoader(dataset,batch_siz">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine learning 3 (Hungyi Lee)">
+<meta property="og:title" content="Machine learning 3 HW (Hungyi Lee)">
 <meta property="og:url" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/index.html">
 <meta property="og:site_name" content="SHEN&#39;s Blog">
 <meta property="og:description" content="Home Work 1这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader Dataset就是存数据结构的  Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 1dataset &#x3D; MyDataset(file)  1dataloader &#x3D; DataLoader(dataset,batch_siz">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250728235227843.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250729000214474.png">
 <meta property="article:published_time" content="2025-07-28T14:31:00.000Z">
-<meta property="article:modified_time" content="2025-07-28T17:29:12.369Z">
+<meta property="article:modified_time" content="2025-07-29T07:11:46.042Z">
 <meta property="article:author" content="SHEN Qi">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
@@ -47,7 +47,7 @@
       
     
     <!-- title -->
-    <title>Machine learning 3 (Hungyi Lee)</title>
+    <title>Machine learning 3 HW (Hungyi Lee)</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -115,6 +115,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2025/07/29/machine-learning-4/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/2025/07/27/tutorial/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -130,23 +132,23 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&text=Machine learning 3 (Hungyi Lee)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&is_video=false&description=Machine learning 3 (Hungyi Lee)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Machine learning 3 (Hungyi Lee)&body=Check out this article: https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&name=Machine learning 3 (Hungyi Lee)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/&t=Machine learning 3 (Hungyi Lee)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&text=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&is_video=false&description=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine learning 3 HW (Hungyi Lee)&body=Check out this article: https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&name=Machine learning 3 HW (Hungyi Lee)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/&t=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HomeWork-1"><span class="toc-number">1.7.</span> <span class="toc-text">HomeWork 1</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -159,7 +161,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Machine learning 3 (Hungyi Lee)
+        Machine learning 3 HW (Hungyi Lee)
     </h1>
 
 
@@ -173,7 +175,7 @@
       
         <time datetime="2025-07-28T14:31:00.000Z" class="dt-published" itemprop="datePublished">2025-07-28</time>
         
-        (Updated: <time datetime="2025-07-28T17:29:12.369Z" class="dt-updated" itemprop="dateModified">2025-07-29</time>)
+        (Updated: <time datetime="2025-07-29T07:11:46.042Z" class="dt-updated" itemprop="dateModified">2025-07-29</time>)
         
       
     </div>
@@ -348,6 +350,12 @@
 </ul>
 <p><img src="/2025/07/28/machine-learning-3/image-20250729000214474.png" alt="image-20250729000214474"></p>
 <h3 id="完整的流程"><a href="#完整的流程" class="headerlink" title="完整的流程"></a>完整的流程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">dataset = MyDataset(file) <span class="comment"># read data via MyDataset</span></span><br><span class="line">tr_set = DataLoader(dataset, <span class="number">16</span>, shuffle=<span class="literal">True</span>) <span class="comment"># put dataset into Dataloader</span></span><br><span class="line">model = MyModel().to(device) <span class="comment"># construct model and move to device (cpu/cuda)</span></span><br><span class="line">criterion = nn.MSELoss() <span class="comment"># set loss function</span></span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), <span class="number">0.1</span>) <span class="comment"># set optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(n_epochs): <span class="comment"># iterate n_epochs</span></span><br><span class="line">    model.train() <span class="comment"># set model to train mode</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> tr_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">        optimizer.zero_grad() <span class="comment"># set gradient to zero</span></span><br><span class="line">        x, y = x.to(device), y.to(device) <span class="comment"># move data to device (cpu/cuda)</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        loss = criterion(pred, y) <span class="comment"># compute loss</span></span><br><span class="line">        loss.backward() <span class="comment"># compute gradient (backpropagation)</span></span><br><span class="line">        optimizer.step() <span class="comment"># update model with optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># testing</span></span><br><span class="line">model.<span class="built_in">eval</span>() <span class="comment"># set model to evaluation mode</span></span><br><span class="line">total_loss = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> dv_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">    x, y = x.to(device), y.to(device) <span class="comment"># move data to device (cpu/cuda)</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): <span class="comment"># disable gradient calculation</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        loss = criterion(pred, y) <span class="comment"># compute loss</span></span><br><span class="line">    total_loss += loss.cpu().item() * <span class="built_in">len</span>(x) <span class="comment"># accumulate loss</span></span><br><span class="line">    avg_loss = total_loss / <span class="built_in">len</span>(dv_set.dataset) <span class="comment"># compute averaged loss</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># predicating</span></span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line">preds = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> tt_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">    x = x.to(device) </span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): <span class="comment"># disable gradient calculation</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        preds.append(pred.cpu()) <span class="comment"># collect prediction</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># save</span></span><br><span class="line">torch.save(model.state_dict(), path)</span><br><span class="line"><span class="comment"># load</span></span><br><span class="line">ckpt = torch.load(path)</span><br><span class="line">model.load_state_dict(ckpt)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HomeWork-1"><a href="#HomeWork-1" class="headerlink" title="HomeWork 1"></a>HomeWork 1</h3><p>没去用kaggle测分数，简单写了下</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/qshen0629/machine-learing-HW/tree/main/ml2022spring-hw1">https://github.com/qshen0629/machine-learing-HW/tree/main/ml2022spring-hw1</a></p>
+
   </div>
 </article>
 
@@ -374,23 +382,23 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HomeWork-1"><span class="toc-number">1.7.</span> <span class="toc-text">HomeWork 1</span></a></li></ol></li></ol>
       </div>
     
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&text=Machine learning 3 (Hungyi Lee)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&is_video=false&description=Machine learning 3 (Hungyi Lee)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Machine learning 3 (Hungyi Lee)&body=Check out this article: https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 (Hungyi Lee)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&name=Machine learning 3 (Hungyi Lee)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/&t=Machine learning 3 (Hungyi Lee)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&text=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&is_video=false&description=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine learning 3 HW (Hungyi Lee)&body=Check out this article: https://qshen0629.github.io/2025/07/28/machine-learning-3/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&title=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/07/28/machine-learning-3/&name=Machine learning 3 HW (Hungyi Lee)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/07/28/machine-learning-3/&t=Machine learning 3 HW (Hungyi Lee)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
