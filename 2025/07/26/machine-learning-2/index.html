@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="序章2 序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models） 源自模型自身限制的缺陷称作： Model Bias 选择更好的Model 1.分段线性函数是由常数加上多段线性函数组成的  2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。  3.反之也可以，下面那个是sigmoid函数  4.使用各种sigm">
+    <meta name="description" content="序章2序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models） 源自模型自身限制的缺陷称作： Model Bias 选择更好的Model1.分段线性函数是由常数加上多段线性函数组成的 2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。 3.反之也可以，下面那个是sigmoid函数 4.使用各种sigmoid f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine learning 2 (Hungyi Lee)">
 <meta property="og:url" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/index.html">
 <meta property="og:site_name" content="SHEN&#39;s Blog">
-<meta property="og:description" content="序章2 序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models） 源自模型自身限制的缺陷称作： Model Bias 选择更好的Model 1.分段线性函数是由常数加上多段线性函数组成的  2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。  3.反之也可以，下面那个是sigmoid函数  4.使用各种sigm">
+<meta property="og:description" content="序章2序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models） 源自模型自身限制的缺陷称作： Model Bias 选择更好的Model1.分段线性函数是由常数加上多段线性函数组成的 2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。 3.反之也可以，下面那个是sigmoid函数 4.使用各种sigmoid f">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726145305430.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726145459821.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726155604304.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-2/image-20250726155947968.png">
 <meta property="article:published_time" content="2025-07-26T06:35:00.000Z">
-<meta property="article:modified_time" content="2025-07-26T09:39:19.763Z">
+<meta property="article:modified_time" content="2025-07-30T08:31:03.464Z">
 <meta property="article:author" content="SHEN Qi">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
@@ -81,8 +81,6 @@
 
     <!-- persian styles -->
     
-    <!-- katex styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <!-- rss -->
     
     
@@ -184,7 +182,7 @@
       
         <time datetime="2025-07-26T06:35:00.000Z" class="dt-published" itemprop="datePublished">2025-07-26</time>
         
-        (Updated: <time datetime="2025-07-26T09:39:19.763Z" class="dt-updated" itemprop="dateModified">2025-07-26</time>)
+        (Updated: <time datetime="2025-07-30T08:31:03.464Z" class="dt-updated" itemprop="dateModified">2025-07-30</time>)
         
       
     </div>
@@ -204,50 +202,38 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="序章2">序章2</h2>
-<p>序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models）</p>
-<p>源自模型自身限制的缺陷称作： <em><strong>Model Bias</strong></em></p>
-<h3 id="选择更好的Model">选择更好的Model</h3>
-<h4 id="1-分段线性函数是由常数加上多段线性函数组成的">1.分段线性函数是由常数加上多段线性函数组成的</h4>
-<p><img src="image-20250726145305430.png" alt="image-20250726145305430"></p>
-<h4 id="2-使用足够多的蓝色线性函数可以去逼近非线性函数表示。">2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。</h4>
-<p><img src="image-20250726145459821.png" alt="image-20250726145459821"></p>
-<h4 id="3-反之也可以，下面那个是sigmoid函数">3.反之也可以，下面那个是sigmoid函数</h4>
-<p><img src="image-20250726145920813.png" alt="image-20250726145920813"></p>
-<h4 id="4-使用各种sigmoid-fuction-的各种变体来逼近hard-sigmoid">4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid</h4>
-<p><img src="image-20250726150127279.png" alt="image-20250726150127279"></p>
+    <h2 id="序章2"><a href="#序章2" class="headerlink" title="序章2"></a>序章2</h2><p>序章1中使用的只是一次函数，是简单的 linear models，但是现实中往往是更加复杂的模型（sophisticated models）</p>
+<p>源自模型自身限制的缺陷称作： <strong><em>Model Bias</em></strong></p>
+<h3 id="选择更好的Model"><a href="#选择更好的Model" class="headerlink" title="选择更好的Model"></a>选择更好的Model</h3><h4 id="1-分段线性函数是由常数加上多段线性函数组成的"><a href="#1-分段线性函数是由常数加上多段线性函数组成的" class="headerlink" title="1.分段线性函数是由常数加上多段线性函数组成的"></a>1.分段线性函数是由常数加上多段线性函数组成的</h4><p><img src="image-20250726145305430.png" alt="image-20250726145305430"></p>
+<h4 id="2-使用足够多的蓝色线性函数可以去逼近非线性函数表示。"><a href="#2-使用足够多的蓝色线性函数可以去逼近非线性函数表示。" class="headerlink" title="2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。"></a>2.使用足够多的蓝色线性函数可以去逼近非线性函数表示。</h4><p><img src="image-20250726145459821.png" alt="image-20250726145459821"></p>
+<h4 id="3-反之也可以，下面那个是sigmoid函数"><a href="#3-反之也可以，下面那个是sigmoid函数" class="headerlink" title="3.反之也可以，下面那个是sigmoid函数"></a>3.反之也可以，下面那个是sigmoid函数</h4><p><img src="image-20250726145920813.png" alt="image-20250726145920813"></p>
+<h4 id="4-使用各种sigmoid-fuction-的各种变体来逼近hard-sigmoid"><a href="#4-使用各种sigmoid-fuction-的各种变体来逼近hard-sigmoid" class="headerlink" title="4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid"></a>4.使用各种sigmoid fuction 的各种变体来逼近hard sigmoid</h4><p><img src="image-20250726150127279.png" alt="image-20250726150127279"></p>
 <p>可以类似得 ：</p>
 <p><img src="image-20250726150138281.png" alt="image-20250726150138281"></p>
-<p>三个加起来可得：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mi>b</mi><mo>+</mo><mstyle scriptlevel="0" displaystyle="true"><msubsup><mo>∑</mo><mi>i</mi><mn>3</mn></msubsup><msub><mi>c</mi><mi>i</mi></msub><mi>s</mi><mi>i</mi><mi>g</mi><mi>m</mi><mi>o</mi><mi>i</mi><mi>d</mi><mo>(</mo><msub><mi>b</mi><mi>i</mi></msub><mo>+</mo><msub><mi>w</mi><mi>i</mi></msub><msub><mi>x</mi><mn>1</mn></msub><mo>)</mo></mstyle></mrow><annotation encoding="application/x-tex">y=b+\displaystyle\sum_i^3c_isigmoid(b_i+w_ix_1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.8011130000000004em;"></span><span class="strut bottom" style="height:3.0787820000000004em;vertical-align:-1.277669em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mrel">=</span><span class="mord mathit">b</span><span class="mbin">+</span><span class="reset-textstyle displaystyle textstyle uncramped"><span class="mop op-limits"><span class="vlist"><span style="top:1.1776689999999999em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span style="top:-0.000005000000000143778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span><span class="op-symbol large-op mop">∑</span></span></span><span style="top:-1.2500050000000003em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">3</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord"><span class="mord mathit">c</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">m</span><span class="mord mathit">o</span><span class="mord mathit">i</span><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">b</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.02691em;">w</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02691em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>三个加起来可得：$y=b+\displaystyle\sum_i^3c_isigmoid(b_i+w_ix_1)$</p>
 <hr>
-<h4 id="4-模型总结">4.模型总结</h4>
-<p>经过上面的操作和上一节中对多个日期的考虑可得总结后的function：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mi>b</mi><mo>+</mo><mstyle scriptlevel="0" displaystyle="true"><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>c</mi><mi>i</mi></msub><mi>s</mi><mi>i</mi><mi>g</mi><mi>m</mi><mi>o</mi><mi>i</mi><mi>d</mi><mo>(</mo><msub><mi>b</mi><mi>i</mi></msub><mo>+</mo><mstyle scriptlevel="0" displaystyle="true"><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>w</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>x</mi><mi>i</mi></msub><mo>)</mo></mstyle></mstyle></mrow><annotation encoding="application/x-tex">y=b+\displaystyle\sum_ic_isigmoid(b_i+\displaystyle\sum_jw_{ij}x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.0500050000000003em;"></span><span class="strut bottom" style="height:2.463782em;vertical-align:-1.413777em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mrel">=</span><span class="mord mathit">b</span><span class="mbin">+</span><span class="reset-textstyle displaystyle textstyle uncramped"><span class="mop op-limits"><span class="vlist"><span style="top:1.1776689999999999em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span style="top:-0.000005000000000143778em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span><span class="op-symbol large-op mop">∑</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord"><span class="mord mathit">c</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">m</span><span class="mord mathit">o</span><span class="mord mathit">i</span><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">b</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="reset-textstyle displaystyle textstyle uncramped"><span class="mop op-limits"><span class="vlist"><span style="top:1.177669em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.05724em;">j</span></span></span><span style="top:-0.000005000000000032756em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span><span class="op-symbol large-op mop">∑</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord"><span class="mord mathit" style="margin-right:0.02691em;">w</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.02691em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.05724em;">j</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">)</span></span></span></span></span></span> 其中j是对日期的考虑，而i是对多个sigmoid函数的操作。</p>
+<h4 id="4-模型总结"><a href="#4-模型总结" class="headerlink" title="4.模型总结"></a>4.模型总结</h4><p>经过上面的操作和上一节中对多个日期的考虑可得总结后的function：$y=b+\displaystyle\sum_ic_isigmoid(b_i+\displaystyle\sum_jw_{ij}x_i)$ 其中j是对日期的考虑，而i是对多个sigmoid函数的操作。</p>
 <p>附图方便理解：</p>
 <p><img src="image-20250726151242993.png" alt="image-20250726151242993"></p>
 <p><img src="image-20250726151421291.png" alt="image-20250726151421291"></p>
 <p><img src="image-20250726151543618.png" alt="image-20250726151543618"></p>
 <p><img src="image-20250726151657014.png" alt="image-20250726151657014"></p>
-<h3 id="计算loss">计算loss</h3>
-<p>将所有未知数合W,b(向量),c^T,b(常数)在一起表示为未知数 <strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">θ</span></span></span></span></strong> ，计算损失：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>(</mo><mi>θ</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">L(\theta)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">L</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span></p>
-<p>假设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">θ</span></span></span></span>有1000个,那么gradient就有1000行<img src="image-20250726154424265.png" alt="image-20250726154424265"></p>
-<p>对g的优化也是一样的， 计算对每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">θ</span></span></span></span> 的偏微分<img src="image-20250726154621237.png" alt="image-20250726154621237"></p>
-<p>（注意这里的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>θ</mi><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">\theta^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.02778em;">θ</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">0</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> 是有1000个参数的）</p>
+<h3 id="计算loss"><a href="#计算loss" class="headerlink" title="计算loss"></a>计算loss</h3><p>将所有未知数合$W,b(向量),c^T,b(常数)$在一起表示为未知数 <strong>$\theta$</strong> ，计算损失：$L(\theta)$</p>
+<p>假设$\theta$有1000个,那么gradient就有1000行<img src="image-20250726154424265.png" alt="image-20250726154424265"></p>
+<p>对g的优化也是一样的， 计算对每个$\theta$ 的偏微分<img src="image-20250726154621237.png" alt="image-20250726154621237"></p>
+<p>（注意这里的 $\theta^0$ 是有1000个参数的） </p>
 <p>不断优化即可</p>
-<h3 id="Batch">Batch</h3>
-<p>在计算loss时会使用到batch，按照一个batch一个batch进行更新参数，</p>
+<h3 id="Batch"><a href="#Batch" class="headerlink" title="Batch"></a>Batch</h3><p>在计算loss时会使用到batch，按照一个batch一个batch进行更新参数， </p>
 <p><em>1 <strong>epoch</strong> = <strong>see all the batchs once</strong></em></p>
 <p><img src="image-20250726154924298.png" alt="image-20250726154924298"></p>
-<h3 id="ReLU">ReLU</h3>
-<p>关于最处的函数处理其实不是只有sigmoid，还有Rectifued Linear Unit（ReLU）表示为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>max</mi><mo>(</mo><mn>0</mn><mo separator="true">,</mo><mi>b</mi><mo>+</mo><mi>w</mi><msub><mi>x</mi><mn>1</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">c \max(0,b+wx_1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">c</span><span class="mop">max</span><span class="mopen">(</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathit">b</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.02691em;">w</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">)</span></span></span></span></p>
+<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p>关于最处的函数处理其实不是只有sigmoid，还有Rectifued Linear Unit（ReLU）表示为 $c \max(0,b+wx_1)$</p>
 <p><img src="image-20250726155244940.png" alt="image-20250726155244940"></p>
 <p>常常用作激活函数</p>
-<p>Sigmoid --&gt; ReLU 需要两倍的ReLU，因为一个hard Sigmod需要两个ReLU来表示。</p>
-<p><img src="image-20250726155332399.png" alt="image-20250726155332399"></p>
-<h3 id="Deep-Learning">Deep Learning</h3>
-<p>Deep = Many hidden layers haha :)</p>
+<p>Sigmoid —&gt; ReLU 需要两倍的ReLU，因为一个hard Sigmod需要两个ReLU来表示。</p>
+<p> <img src="image-20250726155332399.png" alt="image-20250726155332399"></p>
+<h3 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h3><p>Deep = Many hidden layers haha :)</p>
 <p><img src="image-20250726155604304.png" alt="image-20250726155604304"></p>
-<h3 id="Overfitting">Overfitting</h3>
-<p>在训练资料上变得很好，但是在测试资料上效果不好</p>
+<h3 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h3><p>在训练资料上变得很好，但是在测试资料上效果不好</p>
 <p><img src="image-20250726155947968.png" alt="image-20250726155947968"></p>
 <p>应该选三层的，<strong>我们关注的应该是测试资料上的</strong></p>
 

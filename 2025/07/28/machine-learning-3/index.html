@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Home Work 1 这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader   Dataset就是存数据结构的   Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 1dataset &#x3D; MyDataset(file) 1dataloader &#x3D; DataLoader(dataset,batch_">
+    <meta name="description" content="Home Work 1这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader Dataset就是存数据结构的  Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 1dataset &#x3D; MyDataset(file) 1dataloader &#x3D; DataLoader(dataset,batch_size">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine learning 3 HW (Hungyi Lee)">
 <meta property="og:url" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/index.html">
 <meta property="og:site_name" content="SHEN&#39;s Blog">
-<meta property="og:description" content="Home Work 1 这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader   Dataset就是存数据结构的   Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 1dataset &#x3D; MyDataset(file) 1dataloader &#x3D; DataLoader(dataset,batch_">
+<meta property="og:description" content="Home Work 1这个是hungyi老师助教的pytorch教程，简单记录一下。 Dataset &amp; Dataloader Dataset就是存数据结构的  Dataloader是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。 1dataset &#x3D; MyDataset(file) 1dataloader &#x3D; DataLoader(dataset,batch_size">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250728230559384.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250728231044647.png">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250728235227843.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/28/machine-learning-3/image-20250729000214474.png">
 <meta property="article:published_time" content="2025-07-28T14:31:00.000Z">
-<meta property="article:modified_time" content="2025-07-29T07:11:46.042Z">
+<meta property="article:modified_time" content="2025-07-30T08:31:22.163Z">
 <meta property="article:author" content="SHEN Qi">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
@@ -74,8 +74,6 @@
 
     <!-- persian styles -->
     
-    <!-- katex styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <!-- rss -->
     
     
@@ -150,7 +148,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HomeWork-1"><span class="toc-number">1.7.</span> <span class="toc-text">HomeWork 1</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-amp-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HomeWork-1"><span class="toc-number">1.7.</span> <span class="toc-text">HomeWork 1</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -177,7 +175,7 @@
       
         <time datetime="2025-07-28T14:31:00.000Z" class="dt-published" itemprop="datePublished">2025-07-28</time>
         
-        (Updated: <time datetime="2025-07-29T07:11:46.042Z" class="dt-updated" itemprop="dateModified">2025-07-29</time>)
+        (Updated: <time datetime="2025-07-30T08:31:22.163Z" class="dt-updated" itemprop="dateModified">2025-07-30</time>)
         
       
     </div>
@@ -197,162 +195,114 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="Home-Work-1">Home Work 1</h2>
-<p>这个是hungyi老师助教的pytorch教程，简单记录一下。</p>
-<h3 id="Dataset-Dataloader">Dataset &amp; Dataloader</h3>
-<ul>
-<li>
-<p><code>Dataset</code>就是存数据结构的</p>
+    <h2 id="Home-Work-1"><a href="#Home-Work-1" class="headerlink" title="Home Work 1"></a>Home Work 1</h2><p>这个是hungyi老师助教的pytorch教程，简单记录一下。</p>
+<h3 id="Dataset-amp-Dataloader"><a href="#Dataset-amp-Dataloader" class="headerlink" title="Dataset &amp; Dataloader"></a>Dataset &amp; Dataloader</h3><ul>
+<li><p><code>Dataset</code>就是存数据结构的</p>
 </li>
-<li>
-<p><code>Dataloader</code>是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。</p>
+<li><p><code>Dataloader</code>是把数据用batch的格式存起来，分成一批一批的，同时能够并行计算。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset = MyDataset(file)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataloader = DataLoader(dataset,batch_size,shuffle=True)</span><br></pre></td></tr></table></figure>
 <p>其中<font color=red><strong><code>shuffle</code></strong></font>在training的时候设置为True，在testing的时候设置为False</p>
 </li>
-<li>
-<p>如何构建<code>Dataset</code>和<code>Dataloader</code></p>
+<li><p>如何构建<code>Dataset</code>和<code>Dataloader</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, Dataloader</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mydataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="comment"># 读取数据和做预处理</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, file</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = ...</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 一次返回一个样例</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getten__</span>(<span class="params">self, index</span>)：</span><br><span class="line">    	<span class="keyword">return</span> <span class="variable language_">self</span>.data[index]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 返回数据集的大小</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>
-<p><code>Dataloader</code>的作用就是从<code>Dataset</code>中每次调用 <code>__getten__(i)</code>然后组成一个mini-batch(大小为<code>batch_size</code>)</p>
+<li><p><code>Dataloader</code>的作用就是从<code>Dataset</code>中每次调用 <code>__getten__(i)</code>然后组成一个mini-batch(大小为<code>batch_size</code>)</p>
 <p><img src="image-20250728230559384.png" alt="image-20250728230559384"></p>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="Tensors">Tensors</h3>
-<ul>
-<li>
-<p>简单来说就是高纬的数据结构</p>
+<h3 id="Tensors"><a href="#Tensors" class="headerlink" title="Tensors"></a>Tensors</h3><ul>
+<li><p>简单来说就是高纬的数据结构</p>
 <p><img src="image-20250728231044647.png" alt="image-20250728231044647"></p>
 </li>
-<li>
-<p>查看tensor的维度：<code>tensor.shape()</code></p>
+<li><p>查看tensor的维度：<code>tensor.shape()</code></p>
 <p><img src="image-20250728231239106.png" alt="image-20250728231239106"></p>
 </li>
-<li>
-<p>创建Tensors</p>
+<li><p>创建Tensors</p>
 <ul>
-<li>
-<p>可以直接从numpy或者list创建</p>
+<li><p>可以直接从numpy或者list创建</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([[<span class="number">1</span>,-<span class="number">1</span>],[<span class="number">1</span>,-<span class="number">1</span>]])</span><br><span class="line">x = torch.from_numpy(np.arry([[<span class="number">1</span>,-<span class="number">1</span>],[<span class="number">1</span>,-<span class="number">1</span>]]))</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">	tensor([[1., -1.],</span></span><br><span class="line"><span class="string">           [1., -1.]])</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>创建全为0或者全为1的</p>
+<li><p>创建全为0或者全为1的</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = torch.zeros([<span class="number">2</span>,<span class="number">2</span>]) <span class="comment"># shape</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">	tensor([[0., 0.],</span></span><br><span class="line"><span class="string">           [0., 0.]])</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">x = torch.ones([<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li>
-<p>经典的操作</p>
+<li><p>经典的操作</p>
 <ul>
-<li>
-<p>Addition</p>
+<li><p>Addition </p>
 <ul>
 <li>z = x + y</li>
 </ul>
 </li>
-<li>
-<p>Subtraction</p>
+<li><p>Subtraction </p>
 <ul>
 <li>z = x - y</li>
 </ul>
 </li>
-<li>
-<p>Power</p>
+<li><p>Power </p>
 <ul>
 <li>y = x.pow(2)</li>
 </ul>
 </li>
-<li>
-<p>Summation</p>
+<li><p>Summation </p>
 <ul>
 <li>y = x.sum()</li>
 </ul>
 </li>
-<li>
-<p>Mean</p>
+<li><p>Mean </p>
 <ul>
 <li>y = x.mean()</li>
 </ul>
 </li>
-<li>
-<p>转置 transpose</p>
+<li><p>转置 transpose</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.transpose(<span class="number">0</span>,<span class="number">1</span>) <span class="comment"># 交换dim = 0 和 dim = 1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">tensor([[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>]])</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>添加 or 删除维度，这并不会导致信息的丢失，只是改变维度</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.squeeze(<span class="number">0</span>) <span class="comment"># dim = 0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.unsqueeze(<span class="number">1</span>) <span class="comment"># 在原来的dim = 1的位置添加一个维度</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>连接多个维度的tensors</p>
-<p><img src="image-20250728233610507.png" alt="image-20250728233610507"></p>
 </li>
 </ul>
 </li>
-<li>
-<p>数据类型</p>
-<table>
-<thead>
-<tr>
-<th>Data Type</th>
-<th>dtype</th>
-<th>tensor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>32bit 浮点数</td>
-<td>torch.float</td>
-<td>torch.FloatTensor</td>
-</tr>
-<tr>
-<td>64bit 带符号整数</td>
-<td>torch.long</td>
-<td>torch.LongTensor</td>
-</tr>
-</tbody>
-</table>
+</ul>
+<ul>
+<li><p>添加 or 删除维度，这并不会导致信息的丢失，只是改变维度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.squeeze(<span class="number">0</span>) <span class="comment"># dim = 0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = x.unsqueeze(<span class="number">1</span>) <span class="comment"># 在原来的dim = 1的位置添加一个维度</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>选择device</p>
+<li><p>连接多个维度的tensors</p>
+<p><img src="image-20250728233610507.png" alt="image-20250728233610507"></p>
+</li>
+</ul>
+<ul>
+<li><p>数据类型</p>
+<p>| Data Type        | dtype       | tensor            |<br>| ———————— | —————- | ————————- |<br>| 32bit 浮点数     | torch.float | torch.FloatTensor |<br>| 64bit 带符号整数 | torch.long  | torch.LongTensor  |</p>
+</li>
+<li><p>选择device</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">torch.cuda.is_available() <span class="comment"># 查看是否有GPU</span></span><br><span class="line">X = x.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">X = x.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>Gradient Calculation 计算梯度</p>
+<li><p>Gradient Calculation 计算梯度</p>
 <ul>
-<li>
-<p>直接放图吧</p>
+<li><p>直接放图吧</p>
 <p><img src="image-20250728234225896.png" alt="image-20250728234225896"></p>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="搭建模型">搭建模型</h3>
+<h3 id="搭建模型"><a href="#搭建模型" class="headerlink" title="搭建模型"></a>搭建模型</h3><ul>
+<li><p>network layers</p>
 <ul>
-<li>
-<p>network layers</p>
-<ul>
-<li>
-<p>例如全连接层：<code>nn.Liner(in_features, out_features)</code>就是只需要定义<font color=red>最后一个输入维度和输出维度</font></p>
+<li><p>例如全连接层：<code>nn.Liner(in_features, out_features)</code>就是只需要定义<font color=red>最后一个输入维度和输出维度</font></p>
 <p><img src="image-20250728234932223.png" alt="image-20250728234932223"></p>
 </li>
-<li>
-<p>还有<code>nn.Sigmoid(), nn.ReLU()</code></p>
+<li><p>还有<code>nn.Sigmoid(), nn.ReLU()</code></p>
 </li>
 </ul>
 </li>
-<li>
-<p>build own neural network</p>
+<li><p>build own neural network</p>
 <ul>
-<li>
-<p>很简单的例子：</p>
+<li><p>很简单的例子：</p>
 <p><img src="image-20250728235100395.png" alt="image-20250728235100395"></p>
 <ul>
-<li>
-<p>等价写法</p>
+<li><p>等价写法</p>
 <p><img src="image-20250728235227843.png" alt="image-20250728235227843"></p>
 </li>
 </ul>
@@ -360,24 +310,18 @@
 </ul>
 </li>
 </ul>
-<h3 id="计算损失">计算损失</h3>
-<ul>
-<li>类别
-<ul>
+<h3 id="计算损失"><a href="#计算损失" class="headerlink" title="计算损失"></a>计算损失</h3><ul>
+<li>类别<ul>
 <li>MSE 用于回归任务 <code>criterion = nn.MSELoss()</code></li>
 <li>Cross Entropy 用于分类任务 <code>criterion = nn.CrossEntropyLoss()</code></li>
 </ul>
 </li>
 <li>计算loss很简单：<code>loss = criterion(model_output, labels)</code></li>
 </ul>
-<h3 id="选择优化方法">选择优化方法</h3>
-<ul>
-<li>
-<p>作业是<font color=red>只用了梯度下降法</font>:<br>
-Stochastic Gradient Descent(SGS): <code>torch.optim.SGD(model.parameters(), lr, momentum = 0)</code></p>
+<h3 id="选择优化方法"><a href="#选择优化方法" class="headerlink" title="选择优化方法"></a>选择优化方法</h3><ul>
+<li><p>作业是<font color=red>只用了梯度下降法</font>:<br>Stochastic Gradient Descent(SGS): <code>torch.optim.SGD(model.parameters(), lr, momentum = 0)</code></p>
 </li>
-<li>
-<p>for every batch of data:</p>
+<li><p>for every batch of data:</p>
 <ol>
 <li>call <code>optimizer.zero_grad()</code> to <strong>reset gradients</strong> of model parameters.</li>
 <li>call <code>loss.backward()</code> to <strong>backpropagate gradients</strong> of prediction loss.</li>
@@ -386,10 +330,8 @@ Stochastic Gradient Descent(SGS): <code>torch.optim.SGD(model.parameters(), lr, 
 </li>
 </ul>
 <p><img src="image-20250729000214474.png" alt="image-20250729000214474"></p>
-<h3 id="完整的流程">完整的流程</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">dataset = MyDataset(file) <span class="comment"># read data via MyDataset</span></span><br><span class="line">tr_set = DataLoader(dataset, <span class="number">16</span>, shuffle=<span class="literal">True</span>) <span class="comment"># put dataset into Dataloader</span></span><br><span class="line">model = MyModel().to(device) <span class="comment"># construct model and move to device (cpu/cuda)</span></span><br><span class="line">criterion = nn.MSELoss() <span class="comment"># set loss function</span></span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), <span class="number">0.1</span>) <span class="comment"># set optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(n_epochs): <span class="comment"># iterate n_epochs</span></span><br><span class="line">    model.train() <span class="comment"># set model to train mode</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> tr_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">        optimizer.zero_grad() <span class="comment"># set gradient to zero</span></span><br><span class="line">        x, y = x.to(device), y.to(device) <span class="comment"># move data to device (cpu/cuda)</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        loss = criterion(pred, y) <span class="comment"># compute loss</span></span><br><span class="line">        loss.backward() <span class="comment"># compute gradient (backpropagation)</span></span><br><span class="line">        optimizer.step() <span class="comment"># update model with optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># testing</span></span><br><span class="line">model.<span class="built_in">eval</span>() <span class="comment"># set model to evaluation mode</span></span><br><span class="line">total_loss = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> dv_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">    x, y = x.to(device), y.to(device) <span class="comment"># move data to device (cpu/cuda)</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): <span class="comment"># disable gradient calculation</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        loss = criterion(pred, y) <span class="comment"># compute loss</span></span><br><span class="line">    total_loss += loss.cpu().item() * <span class="built_in">len</span>(x) <span class="comment"># accumulate loss</span></span><br><span class="line">    avg_loss = total_loss / <span class="built_in">len</span>(dv_set.dataset) <span class="comment"># compute averaged loss</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># predicating</span></span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line">preds = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> tt_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">    x = x.to(device) </span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): <span class="comment"># disable gradient calculation</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        preds.append(pred.cpu()) <span class="comment"># collect prediction</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># save</span></span><br><span class="line">torch.save(model.state_dict(), path)</span><br><span class="line"><span class="comment"># load</span></span><br><span class="line">ckpt = torch.load(path)</span><br><span class="line">model.load_state_dict(ckpt)</span><br></pre></td></tr></table></figure>
-<h3 id="HomeWork-1">HomeWork 1</h3>
-<p>没去用kaggle测分数，简单写了下</p>
+<h3 id="完整的流程"><a href="#完整的流程" class="headerlink" title="完整的流程"></a>完整的流程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">dataset = MyDataset(file) <span class="comment"># read data via MyDataset</span></span><br><span class="line">tr_set = DataLoader(dataset, <span class="number">16</span>, shuffle=<span class="literal">True</span>) <span class="comment"># put dataset into Dataloader</span></span><br><span class="line">model = MyModel().to(device) <span class="comment"># construct model and move to device (cpu/cuda)</span></span><br><span class="line">criterion = nn.MSELoss() <span class="comment"># set loss function</span></span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), <span class="number">0.1</span>) <span class="comment"># set optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(n_epochs): <span class="comment"># iterate n_epochs</span></span><br><span class="line">    model.train() <span class="comment"># set model to train mode</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> tr_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">        optimizer.zero_grad() <span class="comment"># set gradient to zero</span></span><br><span class="line">        x, y = x.to(device), y.to(device) <span class="comment"># move data to device (cpu/cuda)</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        loss = criterion(pred, y) <span class="comment"># compute loss</span></span><br><span class="line">        loss.backward() <span class="comment"># compute gradient (backpropagation)</span></span><br><span class="line">        optimizer.step() <span class="comment"># update model with optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># testing</span></span><br><span class="line">model.<span class="built_in">eval</span>() <span class="comment"># set model to evaluation mode</span></span><br><span class="line">total_loss = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> dv_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">    x, y = x.to(device), y.to(device) <span class="comment"># move data to device (cpu/cuda)</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): <span class="comment"># disable gradient calculation</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        loss = criterion(pred, y) <span class="comment"># compute loss</span></span><br><span class="line">    total_loss += loss.cpu().item() * <span class="built_in">len</span>(x) <span class="comment"># accumulate loss</span></span><br><span class="line">    avg_loss = total_loss / <span class="built_in">len</span>(dv_set.dataset) <span class="comment"># compute averaged loss</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># predicating</span></span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line">preds = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> tt_set: <span class="comment"># iterate through the dataloader</span></span><br><span class="line">    x = x.to(device) </span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): <span class="comment"># disable gradient calculation</span></span><br><span class="line">        pred = model(x) <span class="comment"># forward pass (compute output)</span></span><br><span class="line">        preds.append(pred.cpu()) <span class="comment"># collect prediction</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># save</span></span><br><span class="line">torch.save(model.state_dict(), path)</span><br><span class="line"><span class="comment"># load</span></span><br><span class="line">ckpt = torch.load(path)</span><br><span class="line">model.load_state_dict(ckpt)</span><br></pre></td></tr></table></figure>
+<h3 id="HomeWork-1"><a href="#HomeWork-1" class="headerlink" title="HomeWork 1"></a>HomeWork 1</h3><p>没去用kaggle测分数，简单写了下</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/qshen0629/machine-learing-HW/tree/main/ml2022spring-hw1">https://github.com/qshen0629/machine-learing-HW/tree/main/ml2022spring-hw1</a></p>
 
   </div>
@@ -418,7 +360,7 @@ Stochastic Gradient Descent(SGS): <code>torch.optim.SGD(model.parameters(), lr, 
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HomeWork-1"><span class="toc-number">1.7.</span> <span class="toc-text">HomeWork 1</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Home-Work-1"><span class="toc-number">1.</span> <span class="toc-text">Home Work 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-amp-Dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">Dataset &amp; Dataloader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensors"><span class="toc-number">1.2.</span> <span class="toc-text">Tensors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.4.</span> <span class="toc-text">计算损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">选择优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">完整的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HomeWork-1"><span class="toc-number">1.7.</span> <span class="toc-text">HomeWork 1</span></a></li></ol></li></ol>
       </div>
     
 
