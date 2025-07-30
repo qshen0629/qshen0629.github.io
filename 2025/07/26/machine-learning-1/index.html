@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="序章11.how to find a functio-n设置一个合理的模型：$y&#x3D;b+wx_1$ 其中  $b$ 称作 bias，$w$ 称作 weight。 2.Define Loss from Training Dataloss is a function of parameters  $L(b,w)$ loss代表的是一组参数对于预测这个的任务好还是不好。 ex: 以1月2号为例">
+    <meta name="description" content="序章1 1.how to find a functio-n 设置一个合理的模型：y &#x3D; b + wx1 其中 b 称作 bias，w 称作 weight。 2.Define Loss from Training Data loss is a function of parameters L(b, w) loss代表的是一组参数对于预测这个的任务好还是不好。 ex: 以1月2号为例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine learning 1 (Hungyi Lee)">
 <meta property="og:url" content="https://qshen0629.github.io/2025/07/26/machine-learning-1/index.html">
 <meta property="og:site_name" content="SHEN&#39;s Blog">
-<meta property="og:description" content="序章11.how to find a functio-n设置一个合理的模型：$y&#x3D;b+wx_1$ 其中  $b$ 称作 bias，$w$ 称作 weight。 2.Define Loss from Training Dataloss is a function of parameters  $L(b,w)$ loss代表的是一组参数对于预测这个的任务好还是不好。 ex: 以1月2号为例">
+<meta property="og:description" content="序章1 1.how to find a functio-n 设置一个合理的模型：y &#x3D; b + wx1 其中 b 称作 bias，w 称作 weight。 2.Define Loss from Training Data loss is a function of parameters L(b, w) loss代表的是一组参数对于预测这个的任务好还是不好。 ex: 以1月2号为例">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-1/image-20250726132944717.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/26/machine-learning-1/image-20250726134628554.png">
@@ -145,7 +145,8 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A01"><span class="toc-number">1.</span> <span class="toc-text">序章1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-how-to-find-a-functio-n"><span class="toc-number">1.1.</span> <span class="toc-text">1.how to find a functio-n</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Define-Loss-from-Training-Data"><span class="toc-number">1.2.</span> <span class="toc-text">2.Define Loss from Training Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-optimization-%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3.optimization 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BB%B6%E7%94%B3"><span class="toc-number">1.4.</span> <span class="toc-text">4.延申</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A01"><span class="toc-number">1.</span> <span class="toc-text">序章1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#how-to-find-a-functio-n"><span class="toc-number">1.1.</span> <span class="toc-text">1.how to find a functio-n</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#define-loss-from-training-data"><span class="toc-number">1.2.</span> <span class="toc-text">2.Define Loss from Training
+Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#optimization-%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3.optimization 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E7%94%B3"><span class="toc-number">1.4.</span> <span class="toc-text">4.延申</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -192,40 +193,86 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="序章1"><a href="#序章1" class="headerlink" title="序章1"></a>序章1</h2><h3 id="1-how-to-find-a-functio-n"><a href="#1-how-to-find-a-functio-n" class="headerlink" title="1.how to find a functio-n"></a>1.how to find a functio-n</h3><p>设置一个合理的模型：$y&#x3D;b+wx_1$</p>
-<p>其中  $b$ 称作 bias，$w$ 称作 weight。</p>
-<h3 id="2-Define-Loss-from-Training-Data"><a href="#2-Define-Loss-from-Training-Data" class="headerlink" title="2.Define Loss from Training Data"></a>2.Define Loss from Training Data</h3><p>loss is a function of parameters  $L(b,w)$</p>
+    <h2 id="序章1">序章1</h2>
+<h3 id="how-to-find-a-functio-n">1.how to find a functio-n</h3>
+<p>设置一个合理的模型：<span
+class="math inline"><em>y</em> = <em>b</em> + <em>w</em><em>x</em><sub>1</sub></span></p>
+<p>其中 <span class="math inline"><em>b</em></span> 称作 bias，<span
+class="math inline"><em>w</em></span> 称作 weight。</p>
+<h3 id="define-loss-from-training-data">2.Define Loss from Training
+Data</h3>
+<p>loss is a function of parameters <span
+class="math inline"><em>L</em>(<em>b</em>, <em>w</em>)</span></p>
 <p>loss代表的是一组参数对于预测这个的任务好还是不好。</p>
-<p>ex:<img src="/2025/07/26/machine-learning-1/image-20250726132944717.png" alt="image-20250726132944717"></p>
+<p>ex:<img src="image-20250726132944717.png"
+alt="image-20250726132944717" /></p>
 <p>以1月2号为例</p>
-<p>$L(0.5k,1)\quad y&#x3D;b+wx_1 \rightarrow y &#x3D;0.5k+1x_1$ </p>
-<p>$0.5k+1x_1&#x3D;y &#x3D; 5.3k$</p>
-<p>$e_1 &#x3D; \lvert y-\hat{y}\rvert &#x3D; 0.4k$</p>
-<p>此处$\hat{y}$即为label，</p>
-<p>$$Loss:\quad L&#x3D;\frac{1}{N} \displaystyle\sum_{n}e_n $$</p>
+<p><span
+class="math inline"><em>L</em>(0.5<em>k</em>, 1)  <em>y</em> = <em>b</em> + <em>w</em><em>x</em><sub>1</sub> → <em>y</em> = 0.5<em>k</em> + 1<em>x</em><sub>1</sub></span></p>
+<p><span
+class="math inline">0.5<em>k</em> + 1<em>x</em><sub>1</sub> = <em>y</em> = 5.3<em>k</em></span></p>
+<p><span
+class="math inline"><em>e</em><sub>1</sub> = |<em>y</em> − <em>ŷ</em>| = 0.4<em>k</em></span></p>
+<p>此处<span class="math inline"><em>ŷ</em></span>即为label，</p>
+<p><span class="math display">$$Loss:\quad L=\frac{1}{N}
+\displaystyle\sum_{n}e_n $$</span></p>
 <p>loss的具体介绍看单独的那个吧</p>
-<p><img src="/2025/07/26/machine-learning-1/image-20250726134628554.png" alt="image-20250726134628554"></p>
-<p>这个图很长一段时间内我都不是很理解，横轴为weight（$w$）,纵轴为bias（$b$)图上的颜色的亮度代表Loss的大小；等高线图叫做<em>error surface</em></p>
-<h3 id="3-optimization-优化"><a href="#3-optimization-优化" class="headerlink" title="3.optimization 优化"></a>3.optimization 优化</h3><p>就是接着上面的任务，寻找最合适的 $w$ 和 $b$ 来使loss最小。此例子中使用的是:</p>
-<p><em><strong>gradient descent</strong></em> :</p>
+<figure>
+<img src="image-20250726134628554.png" alt="image-20250726134628554" />
+<figcaption aria-hidden="true">image-20250726134628554</figcaption>
+</figure>
+<p>这个图很长一段时间内我都不是很理解，横轴为weight（<span
+class="math inline"><em>w</em></span>）,纵轴为bias（<span
+class="math inline"><em>b</em></span>)图上的颜色的亮度代表Loss的大小；等高线图叫做<em>error
+surface</em></p>
+<h3 id="optimization-优化">3.optimization 优化</h3>
+<p>就是接着上面的任务，寻找最合适的 <span
+class="math inline"><em>w</em></span> 和 <span
+class="math inline"><em>b</em></span>
+来使loss最小。此例子中使用的是:</p>
+<p><strong><em>gradient descent</em></strong> :</p>
 <p>单参数：</p>
-<ol>
-<li>随机选取初始点 $w^0$</li>
-<li>计算微分 $\frac{\partial L}{\partial w}$  在 $w&#x3D;w^0$时（即在曲线$w^0$处的切线斜率）</li>
-<li>任务就是  $arg \displaystyle\min_w L$</li>
-<li>不断更新 $w$</li>
+<ol type="1">
+<li>随机选取初始点 <span
+class="math inline"><em>w</em><sup>0</sup></span></li>
+<li>计算微分 <span class="math inline">$\frac{\partial L}{\partial
+w}$</span> 在 <span
+class="math inline"><em>w</em> = <em>w</em><sup>0</sup></span>时（即在曲线<span
+class="math inline"><em>w</em><sup>0</sup></span>处的切线斜率）</li>
+<li>任务就是 <span
+class="math inline"><em>a</em><em>r</em><em>g</em>min<sub><em>w</em></sub><em>L</em></span></li>
+<li>不断更新 <span class="math inline"><em>w</em></span></li>
 </ol>
-<p><img src="/2025/07/26/machine-learning-1/image-20250726140620595.png" alt="image-20250726140620595"></p>
-<p>此处参数移动的方向的步伐大小是靠超参数 <strong>学习率learning rate（$\eta$）</strong> 来定义的。</p>
+<figure>
+<img src="image-20250726140620595.png" alt="image-20250726140620595" />
+<figcaption aria-hidden="true">image-20250726140620595</figcaption>
+</figure>
+<p>此处参数移动的方向的步伐大小是靠超参数 <strong>学习率learning
+rate（<span class="math inline"><em>η</em></span>）</strong>
+来定义的。</p>
 <p>局部最优解 local minimal 在batch size那个里面有</p>
 <p>双参数例子：</p>
-<p>（懒得打公式了)  </p>
-<p>$Model:y &#x3D; b + wx_1$<br>$w^<em>,b^</em>&#x3D;arg\displaystyle\min_{w,b} L$</p>
-<p><img src="/2025/07/26/machine-learning-1/image-20250726142353678.png" alt="image-20250726142353678"></p>
-<p><img src="/2025/07/26/machine-learning-1/image-20250726143016786.png" alt="image-20250726143016786"></p>
-<h3 id="4-延申"><a href="#4-延申" class="headerlink" title="4.延申"></a>4.延申</h3><p>上面的例子里面是只根据前一天的观看人次来预测后一天，但是根据规律可以发现是7天一循环，那么我们可以用前7天的观看次数来预测。</p>
-<p>即$y&#x3D;b+\displaystyle\sum_{j&#x3D;1}^{7} w_jx_j$</p>
-<p><img src="/2025/07/26/machine-learning-1/image-20250726143645924.png" alt="image-20250726143645924"></p>
+<p>（懒得打公式了)</p>
+<p><span
+class="math inline"><em>M</em><em>o</em><em>d</em><em>e</em><em>l</em> : <em>y</em> = <em>b</em> + <em>w</em><em>x</em><sub>1</sub></span>
+<span
+class="math inline"><em>w</em><sup>*</sup>, <em>b</em><sup>*</sup> = <em>a</em><em>r</em><em>g</em>min<sub><em>w</em>, <em>b</em></sub><em>L</em></span></p>
+<figure>
+<img src="image-20250726142353678.png" alt="image-20250726142353678" />
+<figcaption aria-hidden="true">image-20250726142353678</figcaption>
+</figure>
+<figure>
+<img src="image-20250726143016786.png" alt="image-20250726143016786" />
+<figcaption aria-hidden="true">image-20250726143016786</figcaption>
+</figure>
+<h3 id="延申">4.延申</h3>
+<p>上面的例子里面是只根据前一天的观看人次来预测后一天，但是根据规律可以发现是7天一循环，那么我们可以用前7天的观看次数来预测。</p>
+<p>即<span class="math inline">$y=b+\displaystyle\sum_{j=1}^{7}
+w_jx_j$</span></p>
+<figure>
+<img src="image-20250726143645924.png" alt="image-20250726143645924" />
+<figcaption aria-hidden="true">image-20250726143645924</figcaption>
+</figure>
 
   </div>
 </article>
@@ -253,7 +300,8 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A01"><span class="toc-number">1.</span> <span class="toc-text">序章1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-how-to-find-a-functio-n"><span class="toc-number">1.1.</span> <span class="toc-text">1.how to find a functio-n</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Define-Loss-from-Training-Data"><span class="toc-number">1.2.</span> <span class="toc-text">2.Define Loss from Training Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-optimization-%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3.optimization 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BB%B6%E7%94%B3"><span class="toc-number">1.4.</span> <span class="toc-text">4.延申</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A01"><span class="toc-number">1.</span> <span class="toc-text">序章1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#how-to-find-a-functio-n"><span class="toc-number">1.1.</span> <span class="toc-text">1.how to find a functio-n</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#define-loss-from-training-data"><span class="toc-number">1.2.</span> <span class="toc-text">2.Define Loss from Training
+Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#optimization-%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">3.optimization 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E7%94%B3"><span class="toc-number">1.4.</span> <span class="toc-text">4.延申</span></a></li></ol></li></ol>
       </div>
     
 
