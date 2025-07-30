@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Batch  Batch size  GPU的并行运算使得大的batch的一次计算的时间并没有很长 大的batch一般更加有效 小的batch会更加noisy    image.png    image.png   使用大的batch size可能导致结果比较差，原因是optimization出错。    image.png   使用full bat">
+    <meta name="description" content="Batch   Batch size  GPU的并行运算使得大的batch的一次计算的时间并没有很长 大的batch一般更加有效 小的batch会更加noisy     使用大的batch size可能导致结果比较差，原因是optimization出错。    使用full batch或者较大的batch size，当遇到saddle point时候就不再能够减少loss，但是使用小batch的时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="batch size">
 <meta property="og:url" content="https://qshen0629.github.io/2025/07/25/batch-size/index.html">
 <meta property="og:site_name" content="SHEN&#39;s Blog">
-<meta property="og:description" content="Batch  Batch size  GPU的并行运算使得大的batch的一次计算的时间并没有很长 大的batch一般更加有效 小的batch会更加noisy    image.png    image.png   使用大的batch size可能导致结果比较差，原因是optimization出错。    image.png   使用full bat">
+<meta property="og:description" content="Batch   Batch size  GPU的并行运算使得大的batch的一次计算的时间并没有很长 大的batch一般更加有效 小的batch会更加noisy     使用大的batch size可能导致结果比较差，原因是optimization出错。    使用full batch或者较大的batch size，当遇到saddle point时候就不再能够减少loss，但是使用小batch的时">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/25/batch-size/image1.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/25/batch-size/image2.png">
@@ -77,6 +77,8 @@
 
     <!-- persian styles -->
     
+    <!-- katex styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <!-- rss -->
     
     
@@ -151,7 +153,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#batch"><span class="toc-number">1.</span> <span class="toc-text">Batch</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch"><span class="toc-number">1.</span> <span class="toc-text">Batch</span></a></li></ol>
       </div>
     
   </span>
@@ -198,94 +200,69 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h3 id="batch">Batch</h3>
+    <h3 id="Batch">Batch</h3>
 <ul>
-<li><p>Batch size</p>
+<li>
+<p>Batch size</p>
 <ul>
 <li>GPU的并行运算使得大的batch的一次计算的时间并没有很长</li>
 <li>大的batch一般更加有效</li>
 <li>小的batch会更加noisy</li>
 </ul>
-<figure>
-<img src="image1.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
-<figure>
-<img src="image2.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
+<p><img src="image1.png" alt="image.png"></p>
+<p><img src="image2.png" alt="image.png"></p>
 <ul>
 <li>使用大的batch size可能导致结果比较差，原因是optimization出错。</li>
 </ul>
-<figure>
-<img src="image3.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
+<p><img src="image3.png" alt="image.png"></p>
 <ul>
-<li>使用full batch或者较大的batch size，当遇到saddle
-point时候就不再能够减少loss，但是使用小batch的时候会遇到多个batch，减少同时出现saddle
-point的概率</li>
+<li>使用full batch或者较大的batch size，当遇到saddle point时候就不再能够减少loss，但是使用小batch的时候会遇到多个batch，减少同时出现saddle point的概率</li>
 </ul>
-<figure>
-<img src="image4.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
+<p><img src="image4.png" alt="image.png"></p>
 <ul>
 <li>小的batch在testing的时候效果更好</li>
 <li>small bacth里面出现了over fitting</li>
 </ul>
-<figure>
-<img src="image5.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
+<p><img src="image5.png" alt="image.png"></p>
 <ul>
-<li><p>假设是出现了样本不匹配</p>
+<li>
+<p>假设是出现了样本不匹配</p>
 <ul>
 <li>可以理解为大的batch size更加容易的找到sharp minima</li>
 <li>小的batch size 会更加容易跳出“峡谷”</li>
 </ul>
-<figure>
-<img src="image6.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure></li>
-<li><p>总结</p></li>
+<p><img src="image6.png" alt="image.png"></p>
+</li>
+<li>
+<p>总结</p>
+</li>
 </ul>
-<figure>
-<img src="image7.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure></li>
-<li><p>momentum</p>
+<p><img src="image7.png" alt="image.png"></p>
+</li>
+<li>
+<p>momentum</p>
 <ul>
 <li>参考物理世界的惯性</li>
 </ul>
-<figure>
-<img src="image8.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
+<p><img src="image8.png" alt="image.png"></p>
 <ul>
 <li>vanila（一般的） gradient descent
 <ul>
 <li>就是根据梯度反方向差*学习率</li>
-</ul></li>
 </ul>
-<figure>
-<img src="image9.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
+</li>
+</ul>
+<p><img src="image9.png" alt="image.png"></p>
 <ul>
 <li>gradient descent + momentum
 <ul>
 <li>不仅仅是梯度的反方向，会考虑前面所有gradient的总和</li>
-</ul></li>
 </ul>
-<figure>
-<img src="image10.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
-<figure>
-<img src="image11.png" alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure></li>
+</li>
+</ul>
+<p><img src="image10.png" alt="image.png"></p>
+<p><img src="image11.png" alt="image.png"></p>
+</li>
 </ul>
 
   </div>
@@ -314,7 +291,7 @@ point的概率</li>
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#batch"><span class="toc-number">1.</span> <span class="toc-text">Batch</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch"><span class="toc-number">1.</span> <span class="toc-text">Batch</span></a></li></ol>
       </div>
     
 
