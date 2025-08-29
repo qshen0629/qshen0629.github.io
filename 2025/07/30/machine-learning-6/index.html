@@ -15,8 +15,13 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250731152401830.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250731154854554.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250829165955416.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250829170108475.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250829170354593.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250829170806693.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250829171449286.png">
 <meta property="article:published_time" content="2025-07-30T09:32:00.000Z">
-<meta property="article:modified_time" content="2025-08-15T10:24:42.886Z">
+<meta property="article:modified_time" content="2025-08-29T09:23:20.466Z">
 <meta property="article:author" content="SHEN Qi">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
@@ -141,7 +146,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">1.1.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">1.2.</span> <span class="toc-text">Root Mean Square</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSProp"><span class="toc-number">1.3.</span> <span class="toc-text">RMSProp</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">1.1.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">1.2.</span> <span class="toc-text">Root Mean Square</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSProp"><span class="toc-number">1.3.</span> <span class="toc-text">RMSProp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam-RMSProp-Momentum"><span class="toc-number">1.4.</span> <span class="toc-text">Adam: RMSProp + Momentum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-Rate-Scheduling"><span class="toc-number">1.5.</span> <span class="toc-text">Learning Rate Scheduling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-rate-dacay"><span class="toc-number">1.5.1.</span> <span class="toc-text">Learning rate dacay</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Warm-up"><span class="toc-number">1.5.2.</span> <span class="toc-text">Warm up</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-of-Optimization"><span class="toc-number">1.6.</span> <span class="toc-text">Summary of Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vanilla-Gradient-Descent"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">(Vanilla) Gradient Descent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Various-Improvements"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">Various Improvements</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
     
   </span>
@@ -168,7 +173,7 @@
       
         <time datetime="2025-07-30T09:32:00.000Z" class="dt-published" itemprop="datePublished">2025-07-30</time>
         
-        (Updated: <time datetime="2025-08-15T10:24:42.886Z" class="dt-updated" itemprop="dateModified">2025-08-15</time>)
+        (Updated: <time datetime="2025-08-29T09:23:20.466Z" class="dt-updated" itemprop="dateModified">2025-08-29</time>)
         
       
     </div>
@@ -216,6 +221,25 @@
 <li>$\theta_i^{t+1}\leftarrow\theta_i^t-\frac{\eta}{\sigma_i^t}g_i^t$，<font color = orange>$\sigma_i^t = \sqrt{\alpha (\sigma_i^{t-1})^2+(1-\alpha)(g_i^t)^2}$</font>，</li>
 </ol>
 <p>其中 0&lt; $\alpha$ &lt;1</p>
+<p><img src="image-20250829165955416.png" alt="image-20250829165955416" style="zoom:50%;" /></p>
+<h2 id="Adam-RMSProp-Momentum"><a href="#Adam-RMSProp-Momentum" class="headerlink" title="Adam: RMSProp + Momentum"></a>Adam: RMSProp + Momentum</h2><p><img src="image-20250829170108475.png" alt="image-20250829170108475" style="zoom: 67%;" /></p>
+<p>例子说明:<br><img src="image-20250829170354593.png" alt="image-20250829170354593" style="zoom:50%;" /></p>
+<ol>
+<li>从loss大的地方往低处走没问题</li>
+<li>到了纵向梯度的局部最优的地方开始往左</li>
+<li>因为在往左移动很长步骤内,纵向的累积梯度很小,导致$\sigma$ 很小,所以在梯度上出现了爆炸</li>
+<li>但是由于移动方向能自动调整,所以很快的回去.</li>
+</ol>
+<h2 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h2><h3 id="Learning-rate-dacay"><a href="#Learning-rate-dacay" class="headerlink" title="Learning rate dacay"></a>Learning rate dacay</h3><p>在随着训练进行时,减少learning rate,使得平稳抵达终点.<br><img src="image-20250829170806693.png" alt="image-20250829170806693" style="zoom:50%;" /></p>
+<h3 id="Warm-up"><a href="#Warm-up" class="headerlink" title="Warm up"></a>Warm up</h3><p>在开始阶段先增大lr,然后再降低lr,经典例如 残差神经网络(residual networl), transformer里也用了<br>解释之一: 在开始时,对$\sigma_i^t$的数据比较少,统计不精准,所以我们要让参数不要离起始点不要太远,进行探索收集有关$\sigma$的数据.<br><img src="image-20250829171449286.png" alt="image-20250829171449286" style="zoom:50%;" /></p>
+<h2 id="Summary-of-Optimization"><a href="#Summary-of-Optimization" class="headerlink" title="Summary of Optimization"></a>Summary of Optimization</h2><h4 id="Vanilla-Gradient-Descent"><a href="#Vanilla-Gradient-Descent" class="headerlink" title="(Vanilla) Gradient Descent"></a>(Vanilla) Gradient Descent</h4><p>$\theta_i^{t+1}\leftarrow\theta_i^{t}-\eta g_i^t$</p>
+<h4 id="Various-Improvements"><a href="#Various-Improvements" class="headerlink" title="Various Improvements"></a>Various Improvements</h4><p>$\theta_i^{t+1}\leftarrow\theta_i^{t}-\frac{\eta^t}{\sigma_i^t} m_i^t$</p>
+<p>具体介绍:</p>
+<ol>
+<li>$m_i^t$     momentum: weighted sum of the previous gradients <font color = red>(考虑方向)</font></li>
+<li>$\sigma_i^t$     root mean square of the gradients <font color = red>(只考虑大小,不考虑方向)</font></li>
+<li>$\eta^t$     learning rate scheduling</li>
+</ol>
 
   </div>
 </article>
@@ -243,7 +267,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">1.1.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">1.2.</span> <span class="toc-text">Root Mean Square</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSProp"><span class="toc-number">1.3.</span> <span class="toc-text">RMSProp</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">1.1.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">1.2.</span> <span class="toc-text">Root Mean Square</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSProp"><span class="toc-number">1.3.</span> <span class="toc-text">RMSProp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam-RMSProp-Momentum"><span class="toc-number">1.4.</span> <span class="toc-text">Adam: RMSProp + Momentum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-Rate-Scheduling"><span class="toc-number">1.5.</span> <span class="toc-text">Learning Rate Scheduling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-rate-dacay"><span class="toc-number">1.5.1.</span> <span class="toc-text">Learning rate dacay</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Warm-up"><span class="toc-number">1.5.2.</span> <span class="toc-text">Warm up</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-of-Optimization"><span class="toc-number">1.6.</span> <span class="toc-text">Summary of Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vanilla-Gradient-Descent"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">(Vanilla) Gradient Descent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Various-Improvements"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">Various Improvements</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
     
 

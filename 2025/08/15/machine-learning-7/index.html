@@ -6,18 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Hi there, I am SHEN Qi, a student from BUPT. I hope my blog can be helpful for you. If there is any question or suggestion, please feel free to contact me by email. I will be thankful for your advice.">
+    <meta name="description" content="损失函数 Loss针对分类问题中的标签问题,可以使用 one-hot vector 来表示,例如 class1 &#x3D; [1 0 0], class2 &#x3D; [0 1 0], class3 &#x3D; [0 0 1]. 这里的softmax是把y中的任意值归一化,其中exp(x)是以e为底的指数,目的是为了让最大和最小之间的差距更大.具体做法: 如果是两个判别类,使用sigmod和softmax,效果是一样的.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine learning 7 (Hungyi Lee)">
 <meta property="og:url" content="https://qshen0629.github.io/2025/08/15/machine-learning-7/index.html">
 <meta property="og:site_name" content="SHEN&#39;s Blog">
-<meta property="og:description" content="Hi there, I am SHEN Qi, a student from BUPT. I hope my blog can be helpful for you. If there is any question or suggestion, please feel free to contact me by email. I will be thankful for your advice.">
+<meta property="og:description" content="损失函数 Loss针对分类问题中的标签问题,可以使用 one-hot vector 来表示,例如 class1 &#x3D; [1 0 0], class2 &#x3D; [0 1 0], class3 &#x3D; [0 0 1]. 这里的softmax是把y中的任意值归一化,其中exp(x)是以e为底的指数,目的是为了让最大和最小之间的差距更大.具体做法: 如果是两个判别类,使用sigmod和softmax,效果是一样的.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qshen0629.github.io/2025/08/15/machine-learning-7/image-20250829173742262.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/08/15/machine-learning-7/image-20250829174140895.png">
+<meta property="og:image" content="https://qshen0629.github.io/2025/08/15/machine-learning-7/image-20250829181918167.png">
 <meta property="article:published_time" content="2025-08-15T09:23:00.000Z">
-<meta property="article:modified_time" content="2025-08-15T09:23:43.333Z">
+<meta property="article:modified_time" content="2025-08-29T10:22:52.982Z">
 <meta property="article:author" content="SHEN Qi">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qshen0629.github.io/2025/08/15/machine-learning-7/image-20250829173742262.png">
     
     
       
@@ -105,7 +109,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="/2025/08/29/BUPT_assistant/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="/2025/08/29/machine-learning-8/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2025/08/04/Summer-in-Shanghai2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -137,6 +141,10 @@
     </div>
     
     
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-Loss"><span class="toc-number">1.</span> <span class="toc-text">损失函数 Loss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Loss-of-Classification"><span class="toc-number">1.0.1.</span> <span class="toc-text">Loss of Classification</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
   </span>
 </div>
 
@@ -161,7 +169,7 @@
       
         <time datetime="2025-08-15T09:23:00.000Z" class="dt-published" itemprop="datePublished">2025-08-15</time>
         
-        (Updated: <time datetime="2025-08-15T09:23:43.333Z" class="dt-updated" itemprop="dateModified">2025-08-15</time>)
+        (Updated: <time datetime="2025-08-29T10:22:52.982Z" class="dt-updated" itemprop="dateModified">2025-08-29</time>)
         
       
     </div>
@@ -181,7 +189,15 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    
+    <h1 id="损失函数-Loss"><a href="#损失函数-Loss" class="headerlink" title="损失函数 Loss"></a>损失函数 Loss</h1><p>针对分类问题中的标签问题,可以使用 one-hot vector 来表示,例如 class1 = [1 0 0], class2 = [0 1 0], class3 = [0 0 1].<br><img src="image-20250829173742262.png" alt="image-20250829173742262"></p>
+<p>这里的softmax是把y中的任意值归一化,其中exp(x)是以e为底的指数,目的是为了让最大和最小之间的差距更大.具体做法:<br><img src="image-20250829174140895.png" alt="image-20250829174140895"></p>
+<p>如果是两个判别类,使用sigmod和softmax,效果是一样的.</p>
+<h3 id="Loss-of-Classification"><a href="#Loss-of-Classification" class="headerlink" title="Loss of Classification"></a>Loss of Classification</h3><ol>
+<li>mse:$ e = \displaystyle\sum_i(\hat{y_i}-y_i’)^2$</li>
+<li>Cross-entropy: $e=-\displaystyle\sum_i\hat{y_i}lny_i’$<br>minimizing cross-entropy is equivalent to maximizing likelihood<br>cross-entropy和softmax一般绑定使用,在pytorch中cross-ebtropy函数自带softmax了</li>
+</ol>
+<p>为什么相较于MSE,Cross enropy更适合判断分类问题?<br><img src="image-20250829181918167.png" alt="image-20250829181918167" style="zoom: 67%;" /><br>不用的主要原因是使用mse时,左上角的largeloss的范围很大,会导致起始的时候会比较难以降低loss,但是在ce之中梯度会比较明显.</p>
+
   </div>
 </article>
 
@@ -207,6 +223,10 @@
 
     
     
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-Loss"><span class="toc-number">1.</span> <span class="toc-text">损失函数 Loss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Loss-of-Classification"><span class="toc-number">1.0.1.</span> <span class="toc-text">Loss of Classification</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
 
     <div id="share-footer" style="display: none">
       <ul>
@@ -227,6 +247,8 @@
 
     <div id="actions-footer">
         <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
         
         <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
         <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
