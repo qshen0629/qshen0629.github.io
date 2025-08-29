@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250731152401830.png">
 <meta property="og:image" content="https://qshen0629.github.io/2025/07/30/machine-learning-6/image-20250731154854554.png">
 <meta property="article:published_time" content="2025-07-30T09:32:00.000Z">
-<meta property="article:modified_time" content="2025-07-31T08:32:17.916Z">
+<meta property="article:modified_time" content="2025-08-15T10:24:42.886Z">
 <meta property="article:author" content="SHEN Qi">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
@@ -141,7 +141,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">2.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">3.</span> <span class="toc-text">Root Mean Square</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">1.1.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">1.2.</span> <span class="toc-text">Root Mean Square</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSProp"><span class="toc-number">1.3.</span> <span class="toc-text">RMSProp</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -168,7 +168,7 @@
       
         <time datetime="2025-07-30T09:32:00.000Z" class="dt-published" itemprop="datePublished">2025-07-30</time>
         
-        (Updated: <time datetime="2025-07-31T08:32:17.916Z" class="dt-updated" itemprop="dateModified">2025-07-31</time>)
+        (Updated: <time datetime="2025-08-15T10:24:42.886Z" class="dt-updated" itemprop="dateModified">2025-08-15</time>)
         
       
     </div>
@@ -188,7 +188,7 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h2><h2 id="Training-stuck-≠-Small-Gradient"><a href="#Training-stuck-≠-Small-Gradient" class="headerlink" title="Training stuck ≠ Small Gradient"></a>Training stuck ≠ Small Gradient</h2><p>在梯度陡峭的方向上lr小一些，在梯度平缓的方向是lr大一些</p>
+    <h1 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h1><h2 id="Training-stuck-≠-Small-Gradient"><a href="#Training-stuck-≠-Small-Gradient" class="headerlink" title="Training stuck ≠ Small Gradient"></a>Training stuck ≠ Small Gradient</h2><p>在梯度陡峭的方向上lr小一些，在梯度平缓的方向是lr大一些</p>
 <p><img src="image-20250731152401830.png" alt="image-20250731152401830" style="zoom:50%;" /></p>
 <p>实现方法：</p>
 <p>原本是$\theta^{t+1}_i\leftarrow\theta^t_i-\eta g^t_i$，其中$g^t_i=\frac{\partial L}{\partial\theta_i}|_{\theta=\theta^t}$；改为$\theta^{t+1}_i\leftarrow\theta^t_i-\frac{\eta}{\sigma^t_i}g^t_i$,其中不同的iteration有不同的σ。</p>
@@ -207,6 +207,15 @@
 </ol>
 <p>这个方法被用于Adagrad</p>
 <p><img src="image-20250731154854554.png" alt="image-20250731154854554" style="zoom:50%;" /></p>
+<h2 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h2><p>第一步和RMS一样,从后面开始:</p>
+<ol>
+<li>$\theta_i^1\leftarrow\theta_i^0-\frac{\eta}{\sigma_i^0}g_i^0$，<font color = green>$\sigma_i^0 = \sqrt{(g_i^0)^2}$</font></li>
+<li>$\theta_i^2\leftarrow\theta_i^1-\frac{\eta}{\sigma_i^1}g_i^1$，<font color = red>$\sigma_i^1 = \sqrt{\alpha (\sigma_i^0)^2+(1-\alpha)(g_i^1)^2}$</font>，</li>
+<li>$\theta_i^3\leftarrow\theta_i^2-\frac{\eta}{\sigma_i^2}g_i^2$，<font color = orange>$\sigma_i^2 = \sqrt{\alpha (\sigma_i^1)^2+(1-\alpha)(g_i^2)^2}$</font>，</li>
+<li>…</li>
+<li>$\theta_i^{t+1}\leftarrow\theta_i^t-\frac{\eta}{\sigma_i^t}g_i^t$，<font color = orange>$\sigma_i^t = \sqrt{\alpha (\sigma_i^{t-1})^2+(1-\alpha)(g_i^t)^2}$</font>，</li>
+</ol>
+<p>其中 0&lt; $\alpha$ &lt;1</p>
 
   </div>
 </article>
@@ -234,7 +243,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">2.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">3.</span> <span class="toc-text">Root Mean Square</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Learning-Rate"><span class="toc-number">1.</span> <span class="toc-text">Learning Rate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-stuck-%E2%89%A0-Small-Gradient"><span class="toc-number">1.1.</span> <span class="toc-text">Training stuck ≠ Small Gradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Mean-Square"><span class="toc-number">1.2.</span> <span class="toc-text">Root Mean Square</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSProp"><span class="toc-number">1.3.</span> <span class="toc-text">RMSProp</span></a></li></ol></li></ol>
       </div>
     
 

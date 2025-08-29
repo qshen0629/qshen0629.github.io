@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="一个MCP小工具如果没有了解过MCP和如何制作自己的MCP可以看看这个视频:https:&#x2F;&#x2F;youtu.be&#x2F;wXAqv8uvY0M?si&#x3D;CaQQNeJzZ0YhXPAN 其实本质上很简单,只需要制作tools,帮助大模型获取更多关于讨论话题的具体信息即可,这些工具可以是具体的操作,也可以是简单的操作说明书. 两个例子: 1234567891011121314151617181920212223">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUPT助手">
+<meta property="og:url" content="https://qshen0629.github.io/2025/08/29/BUPT_assistant/index.html">
+<meta property="og:site_name" content="SHEN&#39;s Blog">
+<meta property="og:description" content="一个MCP小工具如果没有了解过MCP和如何制作自己的MCP可以看看这个视频:https:&#x2F;&#x2F;youtu.be&#x2F;wXAqv8uvY0M?si&#x3D;CaQQNeJzZ0YhXPAN 其实本质上很简单,只需要制作tools,帮助大模型获取更多关于讨论话题的具体信息即可,这些工具可以是具体的操作,也可以是简单的操作说明书. 两个例子: 1234567891011121314151617181920212223">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-29T08:41:01.203Z">
+<meta property="article:author" content="SHEN Qi">
+<meta property="article:tag" content="projects">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/web-app-manifest-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>BUPT助手</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1D8C2J9ZN"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E1D8C2J9ZN');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+    <script async defer
+            data-website-id="4490dbb5-ee58-413d-8840-7508f7ef4ed8"
+            src="https://analytics.domain.com/umami.js">
+    </script>
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/08/15/machine-learning-7/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/08/29/BUPT_assistant/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&text=BUPT助手"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&is_video=false&description=BUPT助手"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BUPT助手&body=Check out this article: https://qshen0629.github.io/2025/08/29/BUPT_assistant/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&name=BUPT助手&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&t=BUPT助手"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%B8%AAMCP%E5%B0%8F%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">一个MCP小工具</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        BUPT助手
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">SHEN Qi</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-08-28T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-08-29</time>
+        
+        (Updated: <time datetime="2025-08-29T08:41:01.203Z" class="dt-updated" itemprop="dateModified">2025-08-29</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/projects/" rel="tag">projects</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="一个MCP小工具"><a href="#一个MCP小工具" class="headerlink" title="一个MCP小工具"></a>一个MCP小工具</h1><p>如果没有了解过MCP和如何制作自己的MCP可以看看这个视频:<a target="_blank" rel="noopener" href="https://youtu.be/wXAqv8uvY0M?si=CaQQNeJzZ0YhXPAN">https://youtu.be/wXAqv8uvY0M?si=CaQQNeJzZ0YhXPAN</a></p>
+<p>其实本质上很简单,只需要制作tools,帮助大模型获取更多关于讨论话题的具体信息即可,这些工具可以是具体的操作,也可以是简单的操作说明书.</p>
+<p>两个例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@mcp.tool() </span><span class="comment"># 只需要用 @mcp.tool() 修饰即可让大模型知道这是工具</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">usage_guide</span>() -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    完整使用指南：</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === BUPT 教务系统 ===</span></span><br><span class="line"><span class="string">    1) 首先调用 login_to_BUPT_website(username, password) 完成首次登录</span></span><br><span class="line"><span class="string">    2) 可用 check_is_login() 检查登录态，返回 Login successful/failed</span></span><br><span class="line"><span class="string">    3) 获取页面内容请用 get_page_content_in_BUPT_website(url)</span></span><br><span class="line"><span class="string">    注意：URL 必须位于 https://jwgl.bupt.edu.cn/jsxsd/ 域名下</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === BUPT 信息门户系统 ===</span></span><br><span class="line"><span class="string">    1) 设置cookies供之后使用</span></span><br><span class="line"><span class="string">    2) 检查登录：check_is_login_in_BUPT_Menhu_website()</span></span><br><span class="line"><span class="string">    3) 获取内容：get_page_content_in_BUPT_Menhu_website(url)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === 登录类型说明 ===</span></span><br><span class="line"><span class="string">    - 教务系统需要使用用户名和密码</span></span><br><span class="line"><span class="string">    - 信息门户需要设置cookies</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === 安全提醒 ===</span></span><br><span class="line"><span class="string">    - 不要在日志/响应中回显密码或验证码</span></span><br><span class="line"><span class="string">    - 两个系统的登录状态是独立的</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    === 常用来访问的校内网址 === </span></span><br><span class="line"><span class="string">    1) 教务系统:https://jwgl.bupt.edu.cn/jsxsd/</span></span><br><span class="line"><span class="string">    2) 信息门户:http://my.bupt.edu.cn/xs_index.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1541</span></span><br><span class="line"><span class="string">    3) 校内通知:http://my.bupt.edu.cn/list.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1154</span></span><br><span class="line"><span class="string">    4) 规章制度:http://my.bupt.edu.cn/list.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1536</span></span><br><span class="line"><span class="string">    5) 图书馆:https://lib.bupt.edu.cn/index.html</span></span><br><span class="line"><span class="string">    6) 校内文件:http://my.bupt.edu.cn/list.jsp?totalpage=15&amp;PAGENUM=1&amp;urltype=tree.TreeTempUrl&amp;wbtreeid=2001</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    完整使用指南：</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === BUPT 教务系统 ===</span></span><br><span class="line"><span class="string">    1) 首先调用 login_to_BUPT_website(username, password) 完成首次登录</span></span><br><span class="line"><span class="string">    2) 可用 check_is_login() 检查登录态，返回 Login successful/failed  </span></span><br><span class="line"><span class="string">    3) 获取页面内容请用 get_page_content_in_BUPT_website(url)</span></span><br><span class="line"><span class="string">    注意：URL 必须位于 https://jwgl.bupt.edu.cn/jsxsd/ 域名下</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === BUPT 信息门户系统 ===</span></span><br><span class="line"><span class="string">    1) 设置cookies供之后使用</span></span><br><span class="line"><span class="string">    2) 检查登录：check_is_login_in_BUPT_Menhu_website()</span></span><br><span class="line"><span class="string">    3) 获取内容：get_page_content_in_BUPT_Menhu_website(url)</span></span><br><span class="line"><span class="string">    注意：URL 必须位于 http://my.bupt.edu.cn/ 域名下</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === 登录类型说明 ===</span></span><br><span class="line"><span class="string">    1) 教务网站需要账号和密码</span></span><br><span class="line"><span class="string">    2) 信息门户网站需要设置cookies</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    === 安全提醒 ===</span></span><br><span class="line"><span class="string">    - 不要在日志/响应中回显密码或验证码</span></span><br><span class="line"><span class="string">    - 两个系统的登录状态是独立的</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@mcp.tool()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login_to_BUPT_JiaoWu_website</span>(<span class="params">context: <span class="built_in">dict</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">    Login to the BUPT website.  </span></span><br><span class="line"><span class="string">    This is the first login, it will let you to get the access to the website.</span></span><br><span class="line"><span class="string">    You don&#x27;t need to run this tool anymore, unless you want to change your username or password.</span></span><br><span class="line"><span class="string">    You need to provide the username and password.</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        username: The username to login with.</span></span><br><span class="line"><span class="string">        password: The password to login with.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        The result of the login.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 在 &quot;&quot;&quot; 中间的内容 &quot;&quot;&quot; 是大模型可以读取的工具说明</span></span><br><span class="line">    username = context.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">    password = context.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">    mylogin.username = username</span><br><span class="line">    mylogin.password = password</span><br><span class="line">    <span class="keyword">if</span> mylogin.login().status_code == <span class="number">200</span>:</span><br><span class="line">        mylogin.is_login = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;ok&quot;</span>: <span class="literal">True</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Login successful&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;ok&quot;</span>: <span class="literal">False</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Login failed&quot;</span>&#125; </span><br></pre></td></tr></table></figure>
+<p>目前已经实现的v0.1可以在<a target="_blank" rel="noopener" href="https://github.com/qshen0629/BUPT-assisant-mcp/tree/v0.1">https://github.com/qshen0629/BUPT-assisant-mcp/tree/v0.1</a></p>
+<p>问一问校车时间和开学时间这些还是能实现的,问题就是速度太慢,而且需要账号登录,还需要做很多完善工作.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%B8%AAMCP%E5%B0%8F%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">一个MCP小工具</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://qshen0629.github.io/2025/08/29/BUPT_assistant/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&text=BUPT助手"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&is_video=false&description=BUPT助手"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BUPT助手&body=Check out this article: https://qshen0629.github.io/2025/08/29/BUPT_assistant/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&title=BUPT助手"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&name=BUPT助手&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://qshen0629.github.io/2025/08/29/BUPT_assistant/&t=BUPT助手"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    SHEN Qi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/qshen0629">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
